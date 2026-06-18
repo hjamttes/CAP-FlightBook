@@ -1,71 +1,75 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Flight Logbook v0.0.1</title>
-<style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-}
+    <title>Flight Logbook v0.0.1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
 
-input, button {
-    margin: 5px;
-}
+        input,
+        button {
+            margin: 5px;
+        }
 
-.flight {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-top: 5px;
-}
-</style>
+        .flight {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 5px;
+        }
+    </style>
 </head>
+
 <body>
 
-<h1>Flight Logbook</h1>
+    <h1>Flight Logbook</h1>
 
-<p>Total Hours: <span id="totalHours">0</span></p>
+    <p>Total Hours: <span id="totalHours">0</span></p>
 
-<input type="date" id="date">
-<input type="text" id="aircraft" placeholder="Aircraft">
-<input type="number" id="hours" placeholder="Hours" step="0.1">
+    <input type="date" id="date">
+    <input type="" text" id="" aircraft" placeholder="Aircraft">
+    <input type="" number" id="" hours" placeholder="" Hours" step="0.1">
 
-<button onclick="addFlight()">Add Flight</button>
+    <button onclick="" addFlight()">Add Flight</button>
 
-<div id="flights"></div>
+    <div id="flights"></div>
 
-<script>
-let flights = [];
+    <script>
+        let flights = [];
 
-function addFlight() {
-    const flight = {
-        date: document.getElementById("date").value,
-        aircraft: document.getElementById("aircraft").value,
-        hours: Number(document.getElementById("hours").value)
-    };
+        function addFlight() {
+            const flight = {
+                date: document.getElementById("date").value,
+                aircraft: document.getElementById("aircraft").value,
+                hours: Number(document.getElementById("hours").value)
+            };
 
-    flights.push(flight);
+            flights.push(flight);
 
-    render();
-}
+            render();
+        }
 
-function render() {
-    let total = 0;
-    let html = "";
+        function render() {
+            let total = 0;
+            let html = "";
 
-    flights.forEach(f => {
-        total += f.hours;
+            flights.forEach(f => {
+                total += f.hours;
 
-        html += `
-        <div class="flight">
-            ${f.date} - ${f.aircraft} - ${f.hours} hrs
-        </div>
-        `;
-    });
+                html += `
+                                                             <div class="flight">
+                                                                            ${f.date} - ${f.aircraft} - ${f.hours} hrs
+                                                                                    </div>
+                                                                                            `;
+            });
 
-    document.getElementById("totalHours").textContent = total.toFixed(1);
-    document.getElementById("flights").innerHTML = html;
-}
-</script>
+            document.getElementById("totalHours").textContent = total.toFixed(1);
+            document.getElementById("flights").innerHTML = html;
+        }
+    </script>
 
 </body>
-</html>
+
+</html>"
