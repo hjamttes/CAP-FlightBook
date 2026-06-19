@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html lang="" en">
-
+<html lang="en">
 <head>
-  <meta charset="" UTF-8">
-  <meta name="" viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="" theme-color" content="" #1a3a6b">
+  <meta name="theme-color" content="#1a3a6b">
   <title>Flight Logbook</title>
-  <link rel="" stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
   <style>
     :root {
       --navy: #1a3a6b;
       --navy-dark: #122b52;
-      --green: #2d7a3a;
       --red: #a32d2d;
       --bg: #f4f4f2;
       --surface: #ffffff;
@@ -40,34 +38,44 @@
       }
     }
 
-    * box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    -webkit-tap-highlight-color: transparent;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
     html,
-    body height: 100%;
-    overflow: hidden;
-    body font-family: -apple-system,
-    BlinkMacSystemFont,
-    'SF Pro Text',
-    'Segoe UI',
-    sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 15px;
-    .app display: flex;
-    flex-direction: column;
-    height: 100vh;
-    height: 100dvh;
-    .topbar background: var(--surface);
-    border-bottom: 0.5px solid var(--border);
-    padding: 0 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    height: 54px;
-    flex-shrink: 0;
-    padding-top: env(safe-area-inset-top, 0);
+    body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .app {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      height: 100dvh;
+    }
+
+    .topbar {
+      background: var(--surface);
+      border-bottom: 0.5px solid var(--border);
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      height: 54px;
+      flex-shrink: 0;
+      padding-top: env(safe-area-inset-top, 0);
+    }
 
     .logo-badge {
       background: var(--navy);
@@ -79,44 +87,67 @@
       letter-spacing: 0.3px;
     }
 
-    .topbar-title font-size: 15px;
-    font-weight: 600;
-    .topbar-right margin-left: auto;
-    .scroll-area flex: 1;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
-    padding-bottom: calc(20px + var(--safe-bottom));
-    .content padding: 14px;
-    max-width: 700px;
-    margin: 0 auto;
-    /* Summary header */
-    .summary-card background: linear-gradient(135deg, var(--navy), #2a5798);
-    color: #fff;
-    border-radius: var(--radius);
-    padding: 18px;
-    margin-bottom: 14px;
-    .summary-top display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 4px;
-    .summary-hours font-size: 32px;
-    font-weight: 700;
-    line-height: 1;
-    .summary-label font-size: 12px;
-    opacity: 0.8;
-    .summary-stats display: flex;
-    gap: 18px;
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 0.5px solid rgba(255, 255, 255, 0.25);
+    .topbar-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .scroll-area {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      padding-bottom: calc(20px + var(--safe-bottom));
+    }
+
+    .content {
+      padding: 14px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .summary-card {
+      background: linear-gradient(135deg, var(--navy), #2a5798);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    .summary-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .summary-hours {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .summary-label {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .summary-stats {
+      display: flex;
+      gap: 18px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 0.5px solid rgba(255, 255, 255, 0.25);
+    }
 
     .summary-stat {
       flex: 1;
     }
 
-    .summary-stat-val font-size: 16px;
-    font-weight: 600;
+    .summary-stat-val {
+      font-size: 16px;
+      font-weight: 600;
+    }
 
     .summary-stat-label {
       font-size: 11px;
@@ -124,17 +155,24 @@
       margin-top: 1px;
     }
 
-    .sec-row display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
-    .sec-title font-size: 17px;
-    font-weight: 600;
-    .sec-sub font-size: 12px;
-    color: var(--text2);
-    margin-top: 1px;
+    .sec-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
 
-    /* Buttons */
+    .sec-title {
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .sec-sub {
+      font-size: 12px;
+      color: var(--text2);
+      margin-top: 1px;
+    }
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -149,15 +187,29 @@
       font-family: inherit;
     }
 
-    .btn:active opacity: 0.7;
-    .btn-primary background: var(--navy);
-    color: #fff;
-    border-color: var(--navy);
-    font-weight: 500;
-    .btn-primary:active background: var(--navy-dark);
-    .btn-sm padding: 6px 11px;
-    font-size: 13px;
-    .btn-danger color: var(--red);
+    .btn:active {
+      opacity: 0.7;
+    }
+
+    .btn-primary {
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--navy);
+      font-weight: 500;
+    }
+
+    .btn-primary:active {
+      background: var(--navy-dark);
+    }
+
+    .btn-sm {
+      padding: 6px 11px;
+      font-size: 13px;
+    }
+
+    .btn-danger {
+      color: var(--red);
+    }
 
     .btn-full {
       width: 100%;
@@ -185,15 +237,22 @@
       z-index: 15;
     }
 
-    .fab:active background: var(--navy-dark);
-    /* Log items */
-    .log-list display: flex;
-    flex-direction: column;
-    gap: 9px;
-    .log-item background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: var(--radius);
-    padding: 13px 15px;
+    .fab:active {
+      background: var(--navy-dark);
+    }
+
+    .log-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .log-item {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 13px 15px;
+    }
 
     .log-top {
       display: flex;
@@ -202,17 +261,28 @@
       margin-bottom: 5px;
     }
 
-    .log-date font-size: 11.5px;
-    color: var(--text2);
-    font-weight: 500;
-    .log-aircraft font-size: 14.5px;
-    font-weight: 600;
-    flex: 1;
-    .log-hrs font-size: 17px;
-    font-weight: 700;
-    color: var(--navy);
-    @media (prefers-color-scheme: dark) .log-hrs {
-      color: #6e9fd4;
+    .log-date {
+      font-size: 11.5px;
+      color: var(--text2);
+      font-weight: 500;
+    }
+
+    .log-aircraft {
+      font-size: 14.5px;
+      font-weight: 600;
+      flex: 1;
+    }
+
+    .log-hrs {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .log-hrs {
+        color: #6e9fd4;
+      }
     }
 
     .log-route {
@@ -224,42 +294,62 @@
       gap: 4px;
     }
 
-    .log-tags display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    align-items: center;
-    .badge display: inline-flex;
-    align-items: center;
-    padding: 3px 8px;
-    border-radius: 5px;
-    font-size: 11px;
-    font-weight: 600;
+    .log-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 600;
+    }
 
     .b-dual {
       background: #ede8fd;
       color: #3c2e99;
     }
 
-    .b-solo background: #fef0d6;
-    color: #7a3d00;
-    .b-xc background: #fde8f0;
-    color: #7a1e40;
-    .b-night background: #2a2a2a;
-    color: #ccc;
-    .b-inst background: #e0f0fa;
-    color: #14506e;
-    .b-sim background: var(--surface2);
-    color: var(--text2);
+    .b-solo {
+      background: #fef0d6;
+      color: #7a3d00;
+    }
+
+    .b-xc {
+      background: #fde8f0;
+      color: #7a1e40;
+    }
+
+    .b-night {
+      background: #2a2a2a;
+      color: #ccc;
+    }
+
+    .b-inst {
+      background: #e0f0fa;
+      color: #14506e;
+    }
+
     @media (prefers-color-scheme: dark) {
       .b-dual {
         background: #2a1f5c;
         color: #b0a2f0;
       }
 
-      .b-solo background: #4a2800;
-      color: #f5c06a;
-      .b-xc background: #4a0e22;
-      color: #f0809a;
+      .b-solo {
+        background: #4a2800;
+        color: #f5c06a;
+      }
+
+      .b-xc {
+        background: #4a0e22;
+        color: #f0809a;
+      }
 
       .b-inst {
         background: #0d3a52;
@@ -267,9 +357,11 @@
       }
     }
 
-    .log-actions margin-left: auto;
-    display: flex;
-    gap: 4px;
+    .log-actions {
+      margin-left: auto;
+      display: flex;
+      gap: 4px;
+    }
 
     .log-notes {
       font-size: 12.5px;
@@ -280,20 +372,24 @@
       line-height: 1.4;
     }
 
-    /* Form */
-    .sheet-overlay position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 50;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    .sheet background: var(--surface);
-    border-radius: 18px 18px 0 0;
-    max-height: 92vh;
-    overflow-y: auto;
-    padding: 0 16px calc(16px + var(--safe-bottom));
-    -webkit-overflow-scrolling: touch;
+    .sheet-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .sheet {
+      background: var(--surface);
+      border-radius: 18px 18px 0 0;
+      max-height: 92vh;
+      overflow-y: auto;
+      padding: 0 16px calc(16px + var(--safe-bottom));
+      -webkit-overflow-scrolling: touch;
+    }
 
     .sheet-handle {
       width: 36px;
@@ -303,16 +399,21 @@
       margin: 10px auto 14px;
     }
 
-    .sheet-title font-size: 17px;
-    font-weight: 700;
-    margin-bottom: 16px;
-    .form-group margin-bottom: 12px;
+    .sheet-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
 
     .form-group label {
       display: block;
       font-size: 12px;
       font-weight: 600;
-      color: : var(--text2);
+      color: var(--text2);
       margin-bottom: 5px;
     }
 
@@ -336,9 +437,11 @@
       outline-offset: 1px;
     }
 
-    .form-2 display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    .form-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
 
     .form-3 {
       display: grid;
@@ -346,24 +449,31 @@
       gap: 8px;
     }
 
-    .form-divider font-size: 11px;
-    font-weight: 700;
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    margin: 16px 0 10px;
-    .form-actions display: flex;
-    gap: 8px;
-    margin-top: 16px;
+    .form-divider {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin: 16px 0 10px;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+    }
 
     .form-actions .btn {
       flex: 1;
       justify-content: center;
     }
 
-    .empty text-align: center;
-    padding: 60px 24px;
-    color: var(--text2);
+    .empty {
+      text-align: center;
+      padding: 60px 24px;
+      color: var(--text2);
+    }
 
     .empty i {
       font-size: 44px;
@@ -372,189 +482,353 @@
       opacity: 0.4;
     }
 
-    .empty p font-size: 14px;
-    line-height: 1.5;
-    .footer-actions display: flex;
-    gap: 8px;
-    padding: 16px 14px 4px;
-    max-width: 700px;
-    margin: 0 auto;
-    .footer-actions .btn flex: 1;
-    justify-content: center;
-    font-size: 13px;
+    .empty p {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .footer-actions {
+      display: flex;
+      gap: 8px;
+      padding: 16px 14px 4px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .footer-actions .btn {
+      flex: 1;
+      justify-content: center;
+      font-size: 13px;
+    }
+
     @media print {
       .fab,
       .footer-actions,
-      .no-print display: none !important;
-      body overflow: auto;
+      .no-print {
+        display: none !important;
+      }
+
+      body {
+        overflow: auto;
+      }
     }
   </style>
 </head>
-
 <body>
-  <div class="" app" id="app"></div>
+  <div class="app" id="app"></div>
 
   <script>
-    function loadState() {
-      try { const r = localStorage.getItem('simple_logbook_v1'); return r ? JSON.parse(r) : null; } catch (e)  return null;
-    }
-    let S = loadState() || { logs: [], nid: 1 };
-    let MODAL = null, FD = {};
+    (() => {
+      const STORAGE_KEY = 'simple_logbook_v1';
+      let state = loadState();
+      let modal = null;
+      let formData = {};
 
-    function save() { try { localStorage.setItem('simple_logbook_v1', JSON.stringify(S)); } catch (e) { } }
-    function today() { return new Date().toISOString().slice(0, 10); }
-    function f(n)  return (+n || 0).toFixed(1); function g(id)  const e = document.getElementById(id); return e ? e.value : '';
-    function totals() {
-      const t = { total: 0, dual: 0, solo: 0, xc: 0, night: 0, instrument: 0, entries: 0 };
-      S.logs.forEach(l => {
-        t.total += +l.total || 0; t.dual += +l.dual || 0; t.solo += +l.solo || 0;
-        t.xc += +l.xc || 0; t.night += +l.night || 0; t.instrument += +l.instrument || 0;
-        t.entries++;
-      });
-      return t;=
-      "summary-card" >
-      <div class="summary-top">
-                <span class="summary-hours">${f(t.total)}</span>
-                        <span class="summary-label">${t.entries} ${t.entries===1?'entry':'entries'}</span>      </div>      <div class="summary-label">TOTAL FLIGHT HOURS</div>      <div class="summary-stats">
-                                    <div class="summary-stat"><div class="summary-stat-val">${f(t.dual)}</div><div class="summary-stat-label">Dual</div></div>        <div class="summary-stat"><div class="summary-stat-val">${f(t.solo)}</div><div class="summary-stat-label">Solo</div></div>        <div class="summary-stat"><div class="summary-stat-val">${f(t.xc)}</div><div class="summary-stat-label">XC</div></div>
-                                            <div class="summary-stat"><div class="summary-stat-val">${f(t.night)}</div><div class="summary-stat-label">Night</div></div>
-                                                  </div>
-                                                      </div >
-
-        ${
-          sorted.length === 0
-          ? `<div class="empty"><i class="ti ti-plane-off" aria-hidden="true"></i><p>No flights logged yet.<br>Tap the + button to add your first entry.</p></div>`
-          : `<div class="log-list">${sorted.map(logItem).join('')}</div>`
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : { logs: [], nid: 1 };
+        } catch (e) {
+          return { logs: [], nid: 1 };
+        }
       }
-                                                            </div > `;
-                                                        }
 
-                                                        function rModal() {
-                                                              const isEdit = !!FD.id;
-                                                                return `< div class="sheet-overlay" onclick = "if(event.target===this)closeModal()" >
-        <div class="sheet">
-          <div class="sheet-handle"></div>
-          <div class="sheet-title">${isEdit ? 'Edit flight' : 'Log a flight'}</div>
-          <div class="form-2">
-            <div class="form-group"><label>Date *</label><input type="date" id="f_date" value="${FD.date||today()}"></div>
-            <div class="form-group"><label>Total hours *</label><input type="number" id="f_total" value="${FD.total||''}" min="0" max="24" step="0.1" placeholder="0.0" inputmode="decimal"></div>
-          </div>      <div class="form-group"><label>Aircraft</label><input type="text" id="f_aircraft" value="${FD.aircraft||''}" placeholder="N-number / type" autocapitalize="characters"></div>
-          <div class="form-group"><label>Route</label><input type="text" id="f_route" value="${FD.route||''}" placeholder="e.g. KAUS  KSAT" autocapitalize="characters"></div>
+      function saveState() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (e) {
+          // ignore storage errors
+        }
+      }
 
-          <div class="form-divider">Hour breakdown (optional)</div>      <div class="form-3">
-            <div class="form-group"><label>Dual</label><input type="number" id="f_dual" value="${FD.dual||''}" min="0" step="0.1" placeholder="0.0" inputmode="decimal"></div>
-            <div class="form-group"><label>Solo</label><input type="number" id="f_solo" value="${FD.solo||''}" min="0" step="0.1" placeholder="0.0" inputmode="decimal"></div>
-            <div class="form-group"><label>XC</label><input type="number" id="f_xc" value="${FD.xc||''}" min="0" step="0.1" placeholder="0.0" inputmode="decimal"></div>
-            <div class="form-group"><label>Night</label><input type="number" id="f_night" value="${FD.night||''}" min="0" step="0.1" placeholder="0.0" inputmode="decimal"></div>
-            <div class="form-group"><label>Instrument</label><input type="number" id="f_instrument" value="${FD.instrument||''}" min
-              function logItem(l) {
-                                                                                                          return `<div class="log-item">
-                <div class="log-top">
-                  <span class="log-date">${l.date}</span>
-                  <span class="log-aircraft">${l.aircraft || ''}</span>
-                  <span class="log-hrs">${f(l.total)}</span>
+      function today() {
+        return new Date().toISOString().slice(0, 10);
+      }
+
+      function formatHours(value) {
+        return (Number(value) || 0).toFixed(1);
+      }
+
+      function escapeHtml(value) {
+        return String(value ?? '')
+          .replaceAll('&', '&amp;')
+          .replaceAll('<', '&lt;')
+          .replaceAll('>', '&gt;')
+          .replaceAll('"', '&quot;')
+          .replaceAll("'", '&#39;');
+      }
+
+      function getValue(id) {
+        const el = document.getElementById(id);
+        return el ? el.value : '';
+      }
+
+      function getTotals() {
+        const totals = {
+          total: 0,
+          dual: 0,
+          solo: 0,
+          xc: 0,
+          night: 0,
+          instrument: 0,
+          entries: 0
+        };
+
+        for (const log of state.logs) {
+          totals.total += Number(log.total) || 0;
+          totals.dual += Number(log.dual) || 0;
+          totals.solo += Number(log.solo) || 0;
+          totals.xc += Number(log.xc) || 0;
+          totals.night += Number(log.night) || 0;
+          totals.instrument += Number(log.instrument) || 0;
+          totals.entries++;
+        }
+
+        return totals;
+      }
+
+      function logItem(log) {
+        return `
+          <div class="log-item">
+            <div class="log-top">
+              <span class="log-date">${escapeHtml(log.date)}</span>
+              <span class="log-aircraft">${escapeHtml(log.aircraft || '')}</span>
+              <span class="log-hrs">${formatHours(log.total)}</span>
+            </div>
+            ${log.route ? `<div class="log-route"><i class="ti ti-route" style="font-size:13px;" aria-hidden="true"></i> ${escapeHtml(log.route)}</div>` : ''}
+            <div class="log-tags">
+              ${Number(log.dual) > 0 ? `<span class="badge b-dual">Dual ${formatHours(log.dual)}</span>` : ''}
+              ${Number(log.solo) > 0 ? `<span class="badge b-solo">Solo ${formatHours(log.solo)}</span>` : ''}
+              ${Number(log.xc) > 0 ? `<span class="badge b-xc">XC ${formatHours(log.xc)}</span>` : ''}
+              ${Number(log.night) > 0 ? `<span class="badge b-night">Night ${formatHours(log.night)}</span>` : ''}
+              ${Number(log.instrument) > 0 ? `<span class="badge b-inst">Inst ${formatHours(log.instrument)}</span>` : ''}
+              <span style="flex:1"></span>
+              <div class="log-actions no-print">
+                <button class="btn btn-sm" type="button" onclick="openEdit('${log.id}')"><i class="ti ti-edit" aria-hidden="true"></i></button>
+                <button class="btn btn-sm btn-danger" type="button" onclick="delEntry('${log.id}')"><i class="ti ti-trash" aria-hidden="true"></i></button>
+              </div>
+            </div>
+            ${log.instructor ? `<div class="log-notes"><strong>Instructor:</strong> ${escapeHtml(log.instructor)}${log.notes ? '  ' + escapeHtml(log.notes) : ''}</div>` : (log.notes ? `<div class="log-notes">${escapeHtml(log.notes)}</div>` : '')}
+          </div>
+        `;
+      }
+
+      function renderLogbook() {
+        const totals = getTotals();
+        const sorted = [...state.logs].sort((a, b) => b.date.localeCompare(a.date));
+
+        return `
+          <div class="content">
+            <div class="summary-card">
+              <div class="summary-top">
+                <span class="summary-hours">${formatHours(totals.total)}</span>
+                <span class="summary-label">${totals.entries} ${totals.entries === 1 ? 'entry' : 'entries'}</span>
+              </div>
+              <div class="summary-label">TOTAL FLIGHT HOURS</div>
+              <div class="summary-stats">
+                <div class="summary-stat"><div class="summary-stat-val">${formatHours(totals.dual)}</div><div class="summary-stat-label">Dual</div></div>
+                <div class="summary-stat"><div class="summary-stat-val">${formatHours(totals.solo)}</div><div class="summary-stat-label">Solo</div></div>
+                <div class="summary-stat"><div class="summary-stat-val">${formatHours(totals.xc)}</div><div class="summary-stat-label">XC</div></div>
+                <div class="summary-stat"><div class="summary-stat-val">${formatHours(totals.night)}</div><div class="summary-stat-label">Night</div></div>
+              </div>
+            </div>
+            ${sorted.length === 0
+              ? `<div class="empty"><i class="ti ti-plane-off" aria-hidden="true"></i><p>No flights logged yet.<br>Tap the + button to add your first entry.</p></div>`
+              : `<div class="log-list">${sorted.map(logItem).join('')}</div>`
+            }
+          </div>
+        `;
+      }
+
+      function renderModal() {
+        const isEdit = Boolean(formData.id);
+        return `
+          <div class="sheet-overlay" onclick="if (event.target === this) closeModal()">
+            <div class="sheet">
+              <div class="sheet-handle"></div>
+              <div class="sheet-title">${isEdit ? 'Edit flight' : 'Log a flight'}</div>
+              <div class="form-2">
+                <div class="form-group">
+                  <label for="f_date">Date *</label>
+                  <input type="date" id="f_date" value="${escapeHtml(formData.date || today())}">
                 </div>
-                ${l.route ? `<div class="log-route"><i class="ti ti-route" style="font-size:13px;" aria-hidden="true"></i> ${l.route}</div>` : ''}
-                <div class="log-tags">
-                  ${(+l.dual > 0) ? `<span class="badge b-dual">Dual ${f(l.dual)}</span>` : ''}
-                  ${(+l.solo > 0) ? `<span class="badge b-solo">Solo ${f(l.solo)}</span>` : ''}
-                  ${(+l.xc > 0) ? `<span class="badge b-xc">XC ${f(l.xc)}</span>` : ''}
-                  ${(+l.night > 0) ? `<span class="badge b-night">Night ${f(l.night)}</span>` : ''}
-                  ${(+l.instrument > 0) ? `<span class="badge b-inst">Inst ${f(l.instrument)}</span>` : ''}
-                  <span style="flex:1"></span>
-                  <div class="log-actions no-print">
-                    <button class="btn btn-sm" onclick="openEdit('${l.id}')"><i class="ti ti-edit" aria-hidden="true"></i></button>
-                    <button class="btn btn-sm btn-danger" onclick="delEntry('${l.id}')"><i class="ti ti-trash" aria-hidden="true"></i></button>
-                  </div>
+                <div class="form-group">
+                  <label for="f_total">Total hours *</label>
+                  <input type="number" id="f_total" value="${escapeHtml(formData.total ?? '')}" min="0" max="24" step="0.1" placeholder="0.0" inputmode="decimal">
                 </div>
-                ${l.instructor ? `<div class="log-notes"><strong>Instructor:</strong> ${l.instructor}${l.notes ? '  ' + l.notes : ''}</div>` : (l.notes ? `<div class="log-notes">${l.notes}</div>` : '')}
-              </div>`;
-                                                                                                                                                                                                                            }
+              </div>
+              <div class="form-group">
+                <label for="f_aircraft">Aircraft</label>
+                <input type="text" id="f_aircraft" value="${escapeHtml(formData.aircraft || '')}" placeholder="N-number / type" autocapitalize="characters">
+              </div>
+              <div class="form-group">
+                <label for="f_route">Route</label>
+                <input type="text" id="f_route" value="${escapeHtml(formData.route || '')}" placeholder="e.g. KAUS  KSAT" autocapitalize="characters">
+              </div>
 
-              function rLogbook() {
-                                                                                                                                                                                                                                  const t = totals();
-                                                                                                                                                                                                                                    const sorted = S.logs.slice().sort((a,b)=>b.date.localeCompare(a.date));
-              return `<div class="content">
-                <div classn="0" step="0.1" placeholder="0.0" inputmode="decimal"></div>        <div class="form-group"><label>Landings</label><input type="number" id="f_landings" value="${FD.landings||''}" min="0" step="1" placeholder="0" inputmode="numeric"></div>      </div>
-              <div class="form-group"><label>Instructor</label><input type="text" id="f_instructor" value="${FD.instructor||''}" placeholder="Name (leave blank if solo)" autocapitalize="words"></div>
-              <div class="form-group"><label>Notes</label><textarea id="f_notes" rows="3" style="resize:vertical;">${FD.notes || ''}</textarea></div>
+              <div class="form-divider">Hour breakdown (optional)</div>
+              <div class="form-3">
+                <div class="form-group"><label for="f_dual">Dual</label><input type="number" id="f_dual" value="${escapeHtml(formData.dual ?? '')}" min="0" step="0.1" placeholder="0.0" inputmode="decimal"></div>
+                <div class="form-group"><label for="f_solo">Solo</label><input type="number" id="f_solo" value="${escapeHtml(formData.solo ?? '')}" min="0" step="0.1" placeholder="0.0" inputmode="decimal"></div>
+                <div class="form-group"><label for="f_xc">XC</label><input type="number" id="f_xc" value="${escapeHtml(formData.xc ?? '')}" min="0" step="0.1" placeholder="0.0" inputmode="decimal"></div>
+                <div class="form-group"><label for="f_night">Night</label><input type="number" id="f_night" value="${escapeHtml(formData.night ?? '')}" min="0" step="0.1" placeholder="0.0" inputmode="decimal"></div>
+                <div class="form-group"><label for="f_instrument">Instrument</label><input type="number" id="f_instrument" value="${escapeHtml(formData.instrument ?? '')}" min="0" step="0.1" placeholder="0.0" inputmode="decimal"></div>
+                <div class="form-group"><label for="f_landings">Landings</label><input type="number" id="f_landings" value="${escapeHtml(formData.landings ?? '')}" min="0" step="1" placeholder="0" inputmode="numeric"></div>
+              </div>
+              <div class="form-group">
+                <label for="f_instructor">Instructor</label>
+                <input type="text" id="f_instructor" value="${escapeHtml(formData.instructor || '')}" placeholder="Name (leave blank if solo)" autocapitalize="words">
+              </div>
+              <div class="form-group">
+                <label for="f_notes">Notes</label>
+                <textarea id="f_notes" rows="3" style="resize:vertical;">${escapeHtml(formData.notes || '')}</textarea>
+              </div>
               <div class="form-actions">
-                <button class="btn" onclick="closeModal()">Cancel</button>        <button class="btn btn-primary" onclick="saveEntry()">${isEdit ? 'Save changes' : 'Log flight'}</button>      </div>    </div>  </div>`;
-                                                                                                                                                                                                                                                              }
+                <button class="btn" type="button" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary" type="button" onclick="saveEntry()">${isEdit ? 'Save changes' : 'Log flight'}</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }
 
-          function openAdd() {MODAL = 'add'; FD={date:today()}; render(); }
-          function openEdit(id) { const e=S.logs.find(l=>l.id===id); if(!e)return; MODAL='add'; FD={...e}; render(); }
-          function closeModal() {MODAL = null; FD={ }; render(); }
+      function openAdd() {
+        modal = 'add';
+        formData = { date: today() };
+        render();
+      }
 
-          function saveEntry() {
-                                                                                                                                                                                                                                                                  const total = parseFloat(g('f_total'));
-          if (!g('f_date') || isNaN(total)) {alert('Date and total hours are required.'); return; }
-          const entry = {
-            id: FD.id || String(S.nid++),
-          date: g('f_date'), aircraft: g('f_aircraft'), route: g('f_route'), total,
-          dual: +g('f_dual')||0, solo: +g('f_solo')||0, xc: +g('f_xc')||0,
-          night: +g('f_night')||0, instrument: +g('f_instrument')||0,
-          landings: +g('f_landings')||0, instructor: g('f_instructor'), notes: g('f_notes')
-                                                                                                                                                                                                                                                                      };
-          if (FD.id) {S.logs = S.logs.map(l => l.id === FD.id ? entry : l); }
-          else {S.logs.push(entry); }
-          save(); MODAL=null; FD={ }; render();
-                                                                                                                                                                                                                                                                    }
+      function openEdit(id) {
+        const entry = state.logs.find((log) => log.id === id);
+        if (!entry) return;
+        modal = 'edit';
+        formData = { ...entry };
+        render();
+      }
 
-          function delEntry(id) {
-                                                                                                                                                                                                                                                                        if (!confirm('Delete this flight entry?')) return;
-                                                                                                                                                                                                                                                                          S.logs = S.logs.filter(l => l.id !== id);
-          save(); render();
-                                                                                                                                                                                                                                                                    }
+      function closeModal() {
+        modal = null;
+        formData = {};
+        render();
+      }
 
-          function exportData() {
-                                                                                                                                                                                                                                                                        const b = new Blob([JSON.stringify(S,null,2)], {type:'application/json'});
-          const a = document.createElement('a');
-          a.href = URL.createObjectURL(b);
-          a.download = `flight_logbook_${today()}.json`;
-          a.click();
-                                                                                                                                                                                                                                                                    }
+      function saveEntry() {
+        const total = parseFloat(getValue('f_total'));
+        const date = getValue('f_date');
 
-          function importData(e) {
-                                                                                                                                                                                                                                                                        const file = e.target.files[0]; if (!file) return;
-          const r = new FileReader();
-                                                                                                                                                                                                                                                                            r.onload = ev => {
-                                                                                                                                                                                                                                                                                  try {
-                                                                                                                                                                                                                                                                                          const d = JSON.parse(ev.target.result);
-          if (!d.logs) {alert('Invalid logbook file.'); return; }
-                                                                                                                                                                                                                                                                                                      const ids = new Set(S.logs.map(l=>l.id));
-                                                                                                                                                                                                                                                                                                            const nl = d.logs.filter(l=>!ids.has(l.id));
-          S.logs = [...S.logs, ...nl];
-                                                                                                                                                                                                                                                                                                                        S.nid = Math.max(S.nid, ...S.logs.map(l=>+l.id||0)) + 1;
-          save(); render();
-          alert(`Imported ${nl.length} new entries.`);
-                                                                                                                                                                                                                                                                                  } catch(err) {alert('Could not read file.'); }
-                                                                                                                                                                                                                                                                                };
-          r.readAsText(file);
-                                                                                                                                                                                                                                                                              }
+        if (!date || Number.isNaN(total)) {
+          alert('Date and total hours are required.');
+          return;
+        }
 
-          function printLog()  window.print();
-          function render() {
-            document.getElementById('app').innerHTML = `
-                                                                                                                                                                                                                                                                                      <div class="topbar">
-                                                                                                                                                                                                                                                                                              <span class="logo-badge">LOG</span>
-                                                                                                                                                                                                                                                                                                    <span class="topbar-title">Flight Logbook</span>
-                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                            <div class="scroll-area">
-                                                                                                                                                                                                                                                                                                                    ${rLogbook()}
-                                                                                                                                                                                                                                                                                                                          <div class="footer-actions no-print">
-                                                                                                                                                                                                                                                                                                                                    <button class="btn" onclick="exportData()"><i class="ti ti-download" aria-hidden="true"></i> Export</button>
-                                                                                                                                                                                                                                                                                                                                            <label class="btn" style="cursor:pointer;"><i class="ti ti-upload" aria-hidden="true"></i> Import<input type="file" accept=".json" style="display:none;" onchange="importData(event)"></label>
-                                                                                                                                                                                                                                                                                                                                                    <button class="btn" onclick="printLog()"><i class="ti ti-printer" aria-hidden="true"></i> Print</button>
-                                                                                                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                                                                                                              </div>
-                                                                                                                                                                                                                                                                                                                                                                  <button class="fab no-print" onclick="openAdd()" aria-label="Log flight"><i class="ti ti-plus"></i></button>
-                                                                                                                                                                                                                                                                                                                                                                      ${MODAL ? rModal() : ''}
-                                                                                                                                                                                                                                                                                                                                                                        `;
-                                                                                                                                                                                                                                                                                                                                                            }
+        const entry = {
+          id: formData.id || String(state.nid++),
+          date,
+          aircraft: getValue('f_aircraft'),
+          route: getValue('f_route'),
+          total,
+          dual: parseFloat(getValue('f_dual')) || 0,
+          solo: parseFloat(getValue('f_solo')) || 0,
+          xc: parseFloat(getValue('f_xc')) || 0,
+          night: parseFloat(getValue('f_night')) || 0,
+          instrument: parseFloat(getValue('f_instrument')) || 0,
+          landings: parseInt(getValue('f_landings'), 10) || 0,
+          instructor: getValue('f_instructor'),
+          notes: getValue('f_notes')
+        };
 
-          render();
+        if (formData.id) {
+          state.logs = state.logs.map((log) => log.id === formData.id ? entry : log);
+        } else {
+          state.logs.push(entry);
+        }
+
+        saveState();
+        modal = null;
+        formData = {};
+        render();
+      }
+
+      function delEntry(id) {
+        if (!confirm('Delete this flight entry?')) return;
+        state.logs = state.logs.filter((log) => log.id !== id);
+        saveState();
+        render();
+      }
+
+      function exportData() {
+        const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `flight_logbook_${today()}.json`;
+        a.click();
+      }
+
+      function importData(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          try {
+            const data = JSON.parse(ev.target.result);
+            if (!data || !Array.isArray(data.logs)) {
+              alert('Invalid logbook file.');
+              return;
+            }
+
+            const existingIds = new Set(state.logs.map((log) => log.id));
+            const newLogs = data.logs.filter((log) => !existingIds.has(log.id));
+            state.logs = [...state.logs, ...newLogs];
+            state.nid = Math.max(state.nid, ...state.logs.map((log) => Number(log.id) || 0)) + 1;
+            saveState();
+            render();
+            alert(`Imported ${newLogs.length} new entries.`);
+          } catch (err) {
+            alert('Could not read file.');
+          }
+        };
+        reader.readAsText(file);
+        event.target.value = '';
+      }
+
+      function printLog() {
+        window.print();
+      }
+
+      function render() {
+        document.getElementById('app').innerHTML = `
+          <div class="topbar">
+            <span class="logo-badge">LOG</span>
+            <span class="topbar-title">Flight Logbook</span>
+          </div>
+          <div class="scroll-area">
+            ${renderLogbook()}
+            <div class="footer-actions no-print">
+              <button class="btn" type="button" onclick="exportData()"><i class="ti ti-download" aria-hidden="true"></i> Export</button>
+              <label class="btn" style="cursor:pointer;">
+                <i class="ti ti-upload" aria-hidden="true"></i> Import
+                <input type="file" accept=".json" style="display:none;" onchange="importData(event)">
+              </label>
+              <button class="btn" type="button" onclick="printLog()"><i class="ti ti-printer" aria-hidden="true"></i> Print</button>
+            </div>
+          </div>
+          <button class="fab no-print" type="button" onclick="openAdd()" aria-label="Log flight"><i class="ti ti-plus"></i></button>
+          ${modal ? renderModal() : ''}
+        `;
+      }
+
+      window.openAdd = openAdd;
+      window.openEdit = openEdit;
+      window.closeModal = closeModal;
+      window.saveEntry = saveEntry;
+      window.delEntry = delEntry;
+      window.exportData = exportData;
+      window.importData = importData;
+      window.printLog = printLog;
+
+      render();
+    })();
   </script>
 </body>
-
 </html>
