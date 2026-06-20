@@ -1,347 +1,415 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="theme-color" content="#1a3a6b">
-        <title>CAP Flight Logbook</title>
-        <link rel=""stylesheet" href=""https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
-        <style>
-            :root {
-                --navy: #1a3a6b;
-                --navy-dark: #122b52;
-                --green: #2d7a3a;
-                --amber: #b85c00;
-                --red: #a32d2d;
-                --bg: #f4f4f2;
-                --surface: #ffffff;
-                --surface2: #f0f0ee;
-                --border: rgba(0,0,0,0.1);
-                --border-mid: rgba(0,0,0,0.18);
-                --text: #1a1a1a;
-                --text2: #666;
-                --text3: #999;
-                --radius: 12px;
-                --radius-sm: 8px;
-                --safe-bottom: env(safe-area-inset-bottom, 0px);
-            }
-            @media (prefers-color-scheme: dark) {
-                :root {
-                    --bg: #111214;
-                    --surface: #1c1d1f;
-                    --surface2: #252628;
-                    --border: rgba(255,255,255,0.08);
-                    --border-mid: rgba(255,255,255,0.14);
-                    --text: #f0f0ee;
-                    --text2: #9a9a9a;
-                    --text3: #666;
-                }
-            }
-            *  box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; html, body { height: 100%; overflow: hidden; }
-            body  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; 
-            .app  display: flex; flex-direction: column; height: 100vh; height: 100dvh; .topbar { background: var(--surface); border-bottom: 0.5px solid var(--border); padding: 0 16px; display: flex; align-items: center; gap: 10px; height: 54px; flex-shrink: 0; padding-top: env(safe-area-inset-top, 0); }
-            .logo-badge { background: var(--navy); color: #fff; border-radius: 6px; padding: 3px 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.4px; display: flex; align-items: center; gap: 4px; }
-            .logo-badge .wing  font-size: 13px; line-height: 1; .topbar-title  font-size: 15px; font-weight: 600; .topbar-right { margin-left: auto; }
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#1a3a6b">
+<title>CAP Flight Logbook</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+  :root {
+    --navy: #1a3a6b;
+    --navy-dark: #122b52;
+    --green: #2d7a3a;
+    --amber: #b85c00;
+    --red: #a32d2d;
+    --bg: #f4f4f2;
+    --surface: #ffffff;
+    --surface2: #f0f0ee;
+    --border: rgba(0,0,0,0.1);
+    --border-mid: rgba(0,0,0,0.18);
+    --text: #1a1a1a;
+    --text2: #666;
+    --text3: #999;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111214;
+      --surface: #1c1d1f;
+      --surface2: #252628;
+      --border: rgba(255,255,255,0.08);
+      --border-mid: rgba(255,255,255,0.14);
+      --text: #f0f0ee;
+      --text2: #9a9a9a;
+      --text3: #666;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; overflow: hidden; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; }
 
-            .scroll-area  flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding-bottom: calc(64px + var(--safe-bottom)); .content  padding: 14px; max-width: 700px; margin: 0 auto; 
-            /* Bottom nav */
-            .bottom-nav  position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); border-top: 0.5px solid var(--border); display: flex; padding-bottom: var(--safe-bottom); z-index: 20; .nav-item  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 4px 6px; cursor: pointer; background: none; border: none; color: var(--text2); font-size: 10px; font-family: inherit; .nav-item i  font-size: 22px; .nav-item.active  color: var(--navy); font-weight: 600; @media (prefers-color-scheme: dark) { .nav-item.active { color: #6e9fd4; } }
+  .app { display: flex; flex-direction: column; height: 100vh; height: 100dvh; }
+  .topbar { background: var(--surface); border-bottom: 0.5px solid var(--border); padding: 0 16px; display: flex; align-items: center; gap: 10px; height: 54px; flex-shrink: 0; padding-top: env(safe-area-inset-top, 0); }
+  .logo-badge { background: var(--navy); color: #fff; border-radius: 6px; padding: 3px 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.4px; display: flex; align-items: center; gap: 4px; }
+  .logo-badge .wing { font-size: 13px; line-height: 1; }
+  .topbar-title { font-size: 15px; font-weight: 600; }
+  .topbar-right { margin-left: auto; }
 
-            /* CAP branded header strip (dashboard) */
-            .cap-strip { background: linear-gradient(135deg, var(--navy), #2a5798); color: #fff; border-radius: var(--radius); padding: 16px 18px; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
-            .cap-strip-emblem  width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; border: 1.5px solid rgba(255,255,255,0.4); .cap-strip-text { flex: 1; min-width: 0; }
-            .cap-strip-org  font-size: 10.5px; letter-spacing: 1px; opacity: 0.8; font-weight: 600; text-transform: uppercase; .cap-strip-name  font-size: 16px; font-weight: 700; margin-top: 1px; .cap-strip-unit  font-size: 12px; opacity: 0.85; margin-top: 1px; 
-            /* Summary card */
-            .summary-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 12px; }
-            .summary-top  display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 4px; .summary-hours { font-size: 30px; font-weight: 700; line-height: 1; color: var(--navy); }
-            @media (prefers-color-scheme: dark) { .summary-hours { color: #6e9fd4; } }
-            .summary-label { font-size: 12px; color: var(--text2); }
-            .summary-stats  display: flex; gap: 16px; margin-top: 12px; padding-top: 12px; border-top: 0.5px solid var(--border); .summary-stat { flex: 1; }
-            .summary-stat-val  font-size: 16px; font-weight: 700; .summary-stat-label  font-size: 11px; color: var(--text2); margin-top: 1px; 
-            .cards-row  display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; .metric-card  background: var(--surface2); border-radius: var(--radius-sm); padding: 12px; .metric-label { font-size: 11px; color: var(--text2); margin-bottom: 3px; }
-            .metric-value  font-size: 20px; font-weight: 700; .metric-sub { font-size: 11px; color: var(--text3); margin-top: 1px; }
+  .scroll-area { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding-bottom: calc(64px + var(--safe-bottom)); }
+  .content { padding: 14px; max-width: 700px; margin: 0 auto; }
 
-            .card  background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 14px; margin-bottom: 10px; .card-label  font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 10px; 
-            .sec-row  display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; .sec-title  font-size: 18px; font-weight: 700; .sec-sub  font-size: 12px; color: var(--text2); margin-top: 1px; 
-            /* Buttons */
-            .btn  display: inline-flex; align-items: center; gap: 5px; padding: 9px 14px; border-radius: var(--radius-sm); border: 0.5px solid var(--border-mid); background: var(--surface); cursor: pointer; font-size: 14px; color: var(--text); font-family: inherit; .btn:active  opacity: 0.7; .btn-primary { background: var(--navy); color: #fff; border-color: var(--navy); font-weight: 500; }
-            .btn-primary:active  background: var(--navy-dark); .btn-sm  padding: 6px 11px; font-size: 13px; .btn-danger  color: var(--red); .btn-full  width: 100%; justify-content: center; font-size: 15px; padding: 13px; .fab  position: fixed; bottom: calc(68px + var(--safe-bottom)); right: 16px; width: 54px; height: 54px; border-radius: 50%; background: var(--navy); color: #fff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 26px; box-shadow: 0 3px 14px rgba(26,58,107,0.4); z-index: 15; .fab:active { background: var(--navy-dark); }
+  /* Bottom nav */
+  .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); border-top: 0.5px solid var(--border); display: flex; padding-bottom: var(--safe-bottom); z-index: 20; }
+  .nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 4px 6px; cursor: pointer; background: none; border: none; color: var(--text2); font-size: 10px; font-family: inherit; }
+  .nav-item i { font-size: 22px; }
+  .nav-item.active { color: var(--navy); font-weight: 600; }
+  @media (prefers-color-scheme: dark) { .nav-item.active { color: #6e9fd4; } }
 
-            /* Log items */
-            .log-list  display: flex; flex-direction: column; gap: 9px; .log-item  background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 13px 15px; .log-top { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
-            .log-date { font-size: 11.5px; color: var(--text2); font-weight: 500; }
-            .log-aircraft  font-size: 14.5px; font-weight: 600; flex: 1; .log-hrs  font-size: 17px; font-weight: 700; color: var(--navy); @media (prefers-color-scheme: dark)  .log-hrs { color: #6e9fd4; } .log-route { font-size: 12.5px; color: var(--text2); margin-bottom: 7px; display: flex; align-items: center; gap: 4px; }
-            .log-tags  display: flex; flex-wrap: wrap; gap: 5px; align-items: center; .badge  display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 5px; font-size: 11px; font-weight: 600; .b-dual   background: #ede8fd; color: #3c2e99; .b-solo   background: #fef0d6; color: #7a3d00; .b-xc    { background: #fde8f0; color: #7a1e40; }
-            .b-night { background: #2a2a2a; color: #ccc; }
-            .b-inst  { background: #e0f0fa; color: #14506e; }
-            @media (prefers-color-scheme: dark) {
-                .b-dual  { background: #2a1f5c; color: #b0a2f0; }
-                .b-solo   background: #4a2800; color: #f5c06a; .b-xc    { background: #4a0e22; color: #f0809a; }
-                .b-inst  { background: #0d3a52; color: #7ec3ea; }
-            }
-            .log-actions  margin-left: auto; display: flex; gap: 4px; .log-notes  font-size: 12.5px; color: var(--text2); margin-top: 9px; padding-top: 9px; border-top: 0.5px solid var(--border); line-height: 1.4; 
-            /* Form */
-            .sheet-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 50; display: flex; flex-direction: column; justify-content: flex-end; }
-            .sheet { background: var(--surface); border-radius: 18px 18px 0 0; max-height: 92vh; overflow-y: auto; padding: 0 16px calc(16px + var(--safe-bottom)); -webkit-overflow-scrolling: touch; }
-            .sheet-handle  width: 36px; height: 4px; background: var(--border-mid); border-radius: 2px; margin: 10px auto 14px; .sheet-title { font-size: 17px; font-weight: 700; margin-bottom: 16px; }
-            .form-group  margin-bottom: 12px; .form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 5px; }
-            .form-group input, .form-group textarea { width: 100%; font-size: 15px; border-radius: var(--radius-sm); border: 0.5px solid var(--border-mid); padding: 10px 12px; background: var(--surface2); color: var(--text); font-family: inherit; appearance: none; -webkit-appearance: none; }
-            .form-group input:focus, .form-group textarea:focus  outline: 2px solid var(--navy); outline-offset: 1px; .form-2  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; .form-3  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; .form-divider { font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.6px; margin: 16px 0 10px; }
-            .form-actions { display: flex; gap: 8px; margin-top: 16px; }
-            .form-actions .btn  flex: 1; justify-content: center; 
-            .empty  text-align: center; padding: 60px 24px; color: var(--text2); .empty i  font-size: 44px; margin-bottom: 14px; display: block; opacity: 0.4; .empty p  font-size: 14px; line-height: 1.5; 
-            /* Settings */
-            .setting-row  display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 0.5px solid var(--border); gap: 12px; .setting-row:last-child  border-bottom: none; .setting-label { font-size: 14px; font-weight: 600; }
-            .setting-desc  font-size: 12px; color: var(--text2); margin-top: 2px; .cap-footer  font-size: 11px; color: var(--text3); text-align: center; margin-top: 18px; padding-bottom: 8px; line-height: 1.6; 
-            @media print {
-                .topbar, .bottom-nav, .fab, .no-print  display: none !important; body  overflow: auto; }
-                </style>
-                </head>
-                <body>
-                    <div class=""app" id="app"></div>
+  /* CAP branded header strip (dashboard) */
+  .cap-strip { background: linear-gradient(135deg, var(--navy), #2a5798); color: #fff; border-radius: var(--radius); padding: 16px 18px; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+  .cap-strip-emblem { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; border: 1.5px solid rgba(255,255,255,0.4); }
+  .cap-strip-text { flex: 1; min-width: 0; }
+  .cap-strip-org { font-size: 10.5px; letter-spacing: 1px; opacity: 0.8; font-weight: 600; text-transform: uppercase; }
+  .cap-strip-name { font-size: 16px; font-weight: 700; margin-top: 1px; }
+  .cap-strip-unit { font-size: 12px; opacity: 0.85; margin-top: 1px; }
 
-                    <script>
-                        function loadState() {
-                            try { const r = localStorage.getItem('cap_logbook_v2'); return r ? JSON.parse(r) : null; } catch(e) { return null; }
-                        }
-                        let S = loadState() || { cadet:{name:'',unit:'',grade:''}, logs:[], nid:1 };
-                        let TAB = 'dash', MODAL = null, FD = {};
+  /* Summary card */
+  .summary-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 12px; }
+  .summary-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 4px; }
+  .summary-hours { font-size: 30px; font-weight: 700; line-height: 1; color: var(--navy); }
+  @media (prefers-color-scheme: dark) { .summary-hours { color: #6e9fd4; } }
+  .summary-label { font-size: 12px; color: var(--text2); }
+  .summary-stats { display: flex; gap: 16px; margin-top: 12px; padding-top: 12px; border-top: 0.5px solid var(--border); }
+  .summary-stat { flex: 1; }
+  .summary-stat-val { font-size: 16px; font-weight: 700; }
+  .summary-stat-label { font-size: 11px; color: var(--text2); margin-top: 1px; }
 
-                        function save() { try { localStorage.setItem('cap_logbook_v2', JSON.stringify(S)); } catch(e) {} }
-                        function today()  return new Date().toISOString().slice(0,10); function f(n)  return (+n||0).toFixed(1); function g(id)  const e=document.getElementById(id); return e?e.value:''; 
-                        function totals() {
-                            const t = {total:0, dual:0, solo:0, xc:0, night:0, instrument:0, entries:0};
-                            S.logs.forEach(l => {
-                                t.total += +l.total||0; t.dual += +l.dual||0; t.solo += +l.solo||0;
-                                t.xc += +l.xc||0; t.night += +l.night||0; t.instrument += +l.instrument||0;
-                                t.entries++;
-                            });
-                            return t;
-                        }
+  .cards-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+  .metric-card { background: var(--surface2); border-radius: var(--radius-sm); padding: 12px; }
+  .metric-label { font-size: 11px; color: var(--text2); margin-bottom: 3px; }
+  .metric-value { font-size: 20px; font-weight: 700; }
+  .metric-sub { font-size: 11px; color: var(--text3); margin-top: 1px; }
 
-                        function logItem(l) {
-                            return `<div class="log-item">
-                                <div class="log-top">
-                                    <span class="log-date">${l.date}</span>
-                                    <span class="log-aircraft">${l.aircraft||''}</span>
-                                    <span class="log-hrs">${f(l.total)}</span>
-                                    </div>
-                                    ${l.route ? `<div class="log-route"><i class="ti ti-route" style="font-size:13px;" aria-hidden="true"></i> ${l.route}</div>` : ''}
-                                    <div class="log-tags">
-                                        ${(+l.dual>0)?`<span class="badge b-dual">Dual ${f(l.dual)}</span>`:''}
-                                        ${(+l.solo>0)?`<span class="badge b-solo">Solo ${f(l.solo)}</span>`:''}
-                                        ${(+l.xc>0)?`<span class="badge b-xc">XC ${f(l.xc)}</span>`:''}
-                                        ${(+l.night>0)?`<span class="badge b-night">Night ${f(l.night)}</span>`:''}
-                                        ${(+l.instrument>0)?`<span class="badge b-inst">Inst ${f(l.instrument)}</span>`:''}
-                                        <span style="flex:1"></span>
-                                        <div class="log-actions no-print">
-                                            <button class="btn btn-sm" onclick="openEdit('${l.id}')"><i class="ti ti-edit" aria-hidden="true"></i></button>
-                                            <button class="btn btn-sm btn-danger" onclick="delEntry('${l.id}')"><i class="ti ti-trash" aria-hidden="true"></i></button>
-                                            </div>
-                                            </div>
-                                            ${l.instructor ? `<div class="log-notes"><strong>Instructor:</strong> ${l.instructor}${l.notes?'  '+l.notes:''}</div>` : (l.notes ? `<div class="log-notes">${l.notes}</div>` : '')}
-                                            </div>`;
-                                        }
+  .card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 14px; margin-bottom: 10px; }
+  .card-label { font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 10px; }
 
-                                        // ---- DASHBOARD ----
-                                        function rDash() {
-                                            const t = totals();
-                                            const c = S.cadet;
-                                            const recent = S.logs.slice().sort((a,b)=>b.date.localeCompare(a.date)).slice(0,4);
-                                            return `<div class="content">
-                                                <div class="cap-strip">
-                                                    <div class="cap-strip-emblem"></div>
-                                                    <div class="cap-strip-text">
-                                                        <div class="cap-strip-org">Civil Air Patrol</div>
-                                                        <div class="cap-strip-name">${c.name || 'Cadet Pilot'}</div>
-                                                        <div class="cap-strip-unit">${[c.grade, c.unit].filter(Boolean).join('  ') || 'Set your profile in Settings'}</div>
-                                                        </div>
-                                                        </div>
+  .sec-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .sec-title { font-size: 18px; font-weight: 700; }
+  .sec-sub { font-size: 12px; color: var(--text2); margin-top: 1px; }
 
-                                                        <div class="summary-card">
-                                                            <div class="summary-top">
-                                                                <span class="summary-hours">${f(t.total)}</span>
-                                                                <span class="summary-label">${t.entries} ${t.entries===1?'entry':'entries'}</span>
-                                                                </div>
-                                                                <div class="summary-label">TOTAL FLIGHT HOURS</div>
-                                                                <div class="summary-stats">
-                                                                    <div class="summary-stat"><div class="summary-stat-val">${f(t.dual)}</div><div class="summary-stat-label">Dual</div></div>
-                                                                    <div class="summary-stat"><div class="summary-stat-val">${f(t.solo)}</div><div class="summary-stat-label">Solo</div></div>
-                                                                    <div class="summary-stat"><div class="summary-stat-val">${f(t.xc)}</div><div class="summary-stat-label">XC</div></div>
-                                                                    <div class="summary-stat"><div class="summary-stat-val">${f(t.night)}</div><div class="summary-stat-label">Night</div></div>
-                                                                    </div>
-                                                                    </div>
+  /* Buttons */
+  .btn { display: inline-flex; align-items: center; gap: 5px; padding: 9px 14px; border-radius: var(--radius-sm); border: 0.5px solid var(--border-mid); background: var(--surface); cursor: pointer; font-size: 14px; color: var(--text); font-family: inherit; }
+  .btn:active { opacity: 0.7; }
+  .btn-primary { background: var(--navy); color: #fff; border-color: var(--navy); font-weight: 500; }
+  .btn-primary:active { background: var(--navy-dark); }
+  .btn-sm { padding: 6px 11px; font-size: 13px; }
+  .btn-danger { color: var(--red); }
+  .btn-full { width: 100%; justify-content: center; font-size: 15px; padding: 13px; }
+  .fab { position: fixed; bottom: calc(68px + var(--safe-bottom)); right: 16px; width: 54px; height: 54px; border-radius: 50%; background: var(--navy); color: #fff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 26px; box-shadow: 0 3px 14px rgba(26,58,107,0.4); z-index: 15; }
+  .fab:active { background: var(--navy-dark); }
 
-                                                                    <div class="cards-row">
-                                                                        <div class="metric-card"><div class="metric-label">Instrument hours</div><div class="metric-value">${f(t.instrument)}</div><div class="metric-sub">logged to date</div></div>
-                                                                        <div class="metric-card"><div class="metric-label">Avg. flight length</div><div class="metric-value">${t.entries?f(t.total/t.entries):'0.0'}</div><div class="metric-sub">hours / flight</div></div>
-                                                                        </div>
+  /* Log items */
+  .log-list { display: flex; flex-direction: column; gap: 9px; }
+  .log-item { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 13px 15px; }
+  .log-top { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+  .log-date { font-size: 11.5px; color: var(--text2); font-weight: 500; }
+  .log-aircraft { font-size: 14.5px; font-weight: 600; flex: 1; }
+  .log-hrs { font-size: 17px; font-weight: 700; color: var(--navy); }
+  @media (prefers-color-scheme: dark) { .log-hrs { color: #6e9fd4; } }
+  .log-route { font-size: 12.5px; color: var(--text2); margin-bottom: 7px; display: flex; align-items: center; gap: 4px; }
+  .log-tags { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
+  .badge { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 5px; font-size: 11px; font-weight: 600; }
+  .b-dual  { background: #ede8fd; color: #3c2e99; }
+  .b-solo  { background: #fef0d6; color: #7a3d00; }
+  .b-xc    { background: #fde8f0; color: #7a1e40; }
+  .b-night { background: #2a2a2a; color: #ccc; }
+  .b-inst  { background: #e0f0fa; color: #14506e; }
+  @media (prefers-color-scheme: dark) {
+    .b-dual  { background: #2a1f5c; color: #b0a2f0; }
+    .b-solo  { background: #4a2800; color: #f5c06a; }
+    .b-xc    { background: #4a0e22; color: #f0809a; }
+    .b-inst  { background: #0d3a52; color: #7ec3ea; }
+  }
+  .log-actions { margin-left: auto; display: flex; gap: 4px; }
+  .log-notes { font-size: 12.5px; color: var(--text2); margin-top: 9px; padding-top: 9px; border-top: 0.5px solid var(--border); line-height: 1.4; }
 
-                                                                        ${recent.length ? `<div class="card"><div class="card-label">Recent flights</div><div class="log-list">${recent.map(logItem).join('')}</div></div>` : `<div class="empty"><i class="ti ti-plane-off" aria-hidden="true"></i><p>No flights logged yet.<br>Tap + on the Logbook tab to start.</p></div>`}
-                                                                        </div>`;
-                                                                    }
+  /* Form */
+  .sheet-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 50; display: flex; flex-direction: column; justify-content: flex-end; }
+  .sheet { background: var(--surface); border-radius: 18px 18px 0 0; max-height: 92vh; overflow-y: auto; padding: 0 16px calc(16px + var(--safe-bottom)); -webkit-overflow-scrolling: touch; }
+  .sheet-handle { width: 36px; height: 4px; background: var(--border-mid); border-radius: 2px; margin: 10px auto 14px; }
+  .sheet-title { font-size: 17px; font-weight: 700; margin-bottom: 16px; }
+  .form-group { margin-bottom: 12px; }
+  .form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 5px; }
+  .form-group input, .form-group textarea { width: 100%; font-size: 15px; border-radius: var(--radius-sm); border: 0.5px solid var(--border-mid); padding: 10px 12px; background: var(--surface2); color: var(--text); font-family: inherit; appearance: none; -webkit-appearance: none; }
+  .form-group input:focus, .form-group textarea:focus { outline: 2px solid var(--navy); outline-offset: 1px; }
+  .form-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .form-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .form-divider { font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.6px; margin: 16px 0 10px; }
+  .form-actions { display: flex; gap: 8px; margin-top: 16px; }
+  .form-actions .btn { flex: 1; justify-content: center; }
 
-                                                                    // ---- LOGBOOK ----
-                                                                    function rLogbook() {
-                                                                        const sorted = S.logs.slice().sort((a,b)=>b.date.localeCompare(a.date));
-                                                                        return `<div class="content">
-                                                                            <div class="sec-row">
-                                                                                <div><div class="sec-title">Logbook</div><div class="sec-sub">${S.logs.length} entries</div></div>
-                                                                                <button class="btn btn-sm no-print" onclick="printLog()"><i class="ti ti-printer" aria-hidden="true"></i> Print</button>
-                                                                                </div>
-                                                                                ${sorted.length===0
-                                                                                    ? `<div class="empty"><i class="ti ti-plane-off" aria-hidden="true"></i><p>No flights yet.<br>Tap the + button to add your first entry.</p></div>`
-                                                                                    : `<div class="log-list">${sorted.map(logItem).join('')}</div>`
-                                                                                }
-                                                                                </div>
-                                                                                <button class="fab no-print" onclick="openAdd()" aria-label="Log flight"><i class="ti ti-plus"></i></button>`;
-                                                                            }
+  .empty { text-align: center; padding: 60px 24px; color: var(--text2); }
+  .empty i { font-size: 44px; margin-bottom: 14px; display: block; opacity: 0.4; }
+  .empty p { font-size: 14px; line-height: 1.5; }
 
-                                                                            // ---- SETTINGS ----
-                                                                            function rSettings() {
-                                                                                const c = S.cadet;
-                                                                                return `<div class="content">
-                                                                                    <div class="sec-title" style="margin-bottom:12px;">Settings</div>
+  /* Settings */
+  .setting-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 0.5px solid var(--border); gap: 12px; }
+  .setting-row:last-child { border-bottom: none; }
+  .setting-label { font-size: 14px; font-weight: 600; }
+  .setting-desc { font-size: 12px; color: var(--text2); margin-top: 2px; }
+  .cap-footer { font-size: 11px; color: var(--text3); text-align: center; margin-top: 18px; padding-bottom: 8px; line-height: 1.6; }
 
-                                                                                    <div class="card">
-                                                                                        <div class="card-label">Cadet profile</div>
-                                                                                        <div class="form-group"><label>Full name</label><input type="text" value="${c.name||''}" oninput="S.cadet.name=this.value;save();" placeholder="Your name"></div>
-                                                                                        <div class="form-2">
-                                                                                            <div class="form-group"><label>CAP unit</label><input type="text" value="${c.unit||''}" oninput="S.cadet.unit=this.value;save();" placeholder="e.g. TX-040"></div>
-                                                                                            <div class="form-group"><label>Grade</label><input type="text" value="${c.grade||''}" oninput="S.cadet.grade=this.value;save();" placeholder="e.g. C/SSgt"></div>
-                                                                                            </div>
-                                                                                            </div>
+  @media print {
+    .topbar, .bottom-nav, .fab, .no-print { display: none !important; }
+    body { overflow: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
 
-                                                                                            <div class="card">
-                                                                                                <div class="card-label">Data</div>
-                                                                                                <div class="setting-row"><div><div class="setting-label">Export logbook</div><div class="setting-desc">Download full JSON backup</div></div><button class="btn btn-sm" onclick="exportData()"><i class="ti ti-download" aria-hidden="true"></i> Export</button></div>
-                                                                                                <div class="setting-row"><div><div class="setting-label">Import logbook</div><div class="setting-desc">Merge from backup file</div></div><label class="btn btn-sm" style="cursor:pointer;"><i class="ti ti-upload" aria-hidden="true"></i> Import<input type="file" accept=".json" style="display:none;" onchange="importData(event)"></label></div>
-                                                                                                <div class="setting-row"><div><div class="setting-label" style="color:var(--red);">Clear all data</div><div class="setting-desc">Permanent  cannot be undone</div></div><button class="btn btn-sm btn-danger" onclick="clearAll()"><i class="ti ti-trash" aria-hidden="true"></i> Clear</button></div>
-                                                                                                </div>
+<script>
+function loadState() {
+  try { const r = localStorage.getItem('cap_logbook_v2'); return r ? JSON.parse(r) : null; } catch(e) { return null; }
+}
+let S = loadState() || { cadet:{name:'',unit:'',grade:''}, logs:[], nid:1 };
+let TAB = 'dash', MODAL = null, FD = {};
 
-                                                                                                <div class="card">
-                                                                                                    <div class="card-label">Print logbook</div>
-                                                                                                    <p style="font-size:13px;color:var(--text2);margin-bottom:12px;">Print or save your flight log as a PDF.</p>
-                                                                                                    <button class="btn btn-full" onclick="printLog()"><i class="ti ti-printer" aria-hidden="true"></i> Print / Save as PDF</button>
-                                                                                                    </div>
+function save() { try { localStorage.setItem('cap_logbook_v2', JSON.stringify(S)); } catch(e) {} }
+function today() { return new Date().toISOString().slice(0,10); }
+function f(n) { return (+n||0).toFixed(1); }
+function g(id) { const e=document.getElementById(id); return e?e.value:''; }
 
-                                                                                                    <div class="cap-footer">CIVIL AIR PATROL  CADET FLIGHT LOGBOOK<br>All data stored locally on this device</div>
-                                                                                                    </div>`;
-                                                                                                }
+function totals() {
+  const t = {total:0, dual:0, solo:0, xc:0, night:0, instrument:0, entries:0};
+  S.logs.forEach(l => {
+    t.total += +l.total||0; t.dual += +l.dual||0; t.solo += +l.solo||0;
+    t.xc += +l.xc||0; t.night += +l.night||0; t.instrument += +l.instrument||0;
+    t.entries++;
+  });
+  return t;
+}
 
-                                                                                                function rModal() {
-                                                                                                    const isEdit = !!FD.id;
-                                                                                                    return `<div class="sheet-overlay" onclick="if(event.target===this)closeModal()">
-                                                                                                        <div class="sheet">
-                                                                                                            <div class="sheet-handle"></div>
-                                                                                                            <div class="sheet-title">${isEdit?'Edit flight':'Log a flight'}</div>
-                                                                                                            <div class="form-2">
-                                                                                                                <div class="form-group"><label>Date *</label><input type="date" id="f_date" value="${FD.date||today()}"></div>
-                                                                                                                <div class="form-group"><label>Total hours *</label><input type="number" id="f_total" value="${FD.total||''}" min="0" max="24" step="0.1" placeholder="0.0" inputmode="decimal"></div>
-                                                                                                                </div>
-                                                                                                                <div class="form-group"><label>Aircraft</label><input type="text" id="f_aircraft" value="${FD.aircraft||''}" placeholder="N-number / type" autocapitalize="characters"></div>
-                                                                                                                <div class="form-group"><label>Route</label><input type="text" id="f_route" value="${FD.route||''}" placeholder="e.g. KAUS  KSAT" autocapitalize="characters"></div>
+function logItem(l) {
+  return `<div class="log-item">
+    <div class="log-top">
+      <span class="log-date">${l.date}</span>
+      <span class="log-aircraft">${l.aircraft||'—'}</span>
+      <span class="log-hrs">${f(l.total)}</span>
+    </div>
+    ${l.route ? `<div class="log-route"><i class="ti ti-route" style="font-size:13px;" aria-hidden="true"></i> ${l.route}</div>` : ''}
+    <div class="log-tags">
+      ${(+l.dual>0)?`<span class="badge b-dual">Dual ${f(l.dual)}</span>`:''}
+      ${(+l.solo>0)?`<span class="badge b-solo">Solo ${f(l.solo)}</span>`:''}
+      ${(+l.xc>0)?`<span class="badge b-xc">XC ${f(l.xc)}</span>`:''}
+      ${(+l.night>0)?`<span class="badge b-night">Night ${f(l.night)}</span>`:''}
+      ${(+l.instrument>0)?`<span class="badge b-inst">Inst ${f(l.instrument)}</span>`:''}
+      <span style="flex:1"></span>
+      <div class="log-actions no-print">
+        <button class="btn btn-sm" onclick="openEdit('${l.id}')"><i class="ti ti-edit" aria-hidden="true"></i></button>
+        <button class="btn btn-sm btn-danger" onclick="delEntry('${l.id}')"><i class="ti ti-trash" aria-hidden="true"></i></button>
+      </div>
+    </div>
+    ${l.instructor ? `<div class="log-notes"><strong>Instructor:</strong> ${l.instructor}${l.notes?' — '+l.notes:''}</div>` : (l.notes ? `<div class="log-notes">${l.notes}</div>` : '')}
+  </div>`;
+}
 
-                                                                                                                <div class="form-divider">Hour breakdown (optional)</div>
-                                                                                                                <div class="form-3">
-                                                                                                                    <div class="form-group"><label>Dual</label><input type="number" id="f_dual" value="${FD.dual||''}" min="0" step="0.1" placeholder="0.0" inputmode="decimal"></div>
-                                                                                                                    <div class="form-group"><label>Solo</label><input type="number" id="f_solo" value="${FD.solo||''}" min="0" step="0.1" placeholder="0.0" inputmode="decimal"></div>
-                                                                                                                    <div class="form-group"><label>XC</label><input type="number" id="f_xc" value="${FD.xc||''}" min="0" step="0.1" placeholder="0.0" inputmode="decimal"></div>
-                                                                                                                    <div class="form-group"><label>Night</label><input type="number" id="f_night" value="${FD.night||''}" min="0" step="0.1" placeholder="0.0" inputmode="decimal"></div>
-                                                                                                                    <div class="form-group"><label>Instrument</label><input type="number" id="f_instrument" value="${FD.instrument||''}" min="0" step="0.1" placeholder="0.0" inputmode="decimal"></div>
-                                                                                                                    <div class="form-group"><label>Landings</label><input type="number" id="f_landings" value="${FD.landings||''}" min="0" step="1" placeholder="0" inputmode="numeric"></div>
-                                                                                                                    </div>
+// ---- DASHBOARD ----
+function rDash() {
+  const t = totals();
+  const c = S.cadet;
+  const recent = S.logs.slice().sort((a,b)=>b.date.localeCompare(a.date)).slice(0,4);
+  return `<div class="content">
+    <div class="cap-strip">
+      <div class="cap-strip-emblem">✈</div>
+      <div class="cap-strip-text">
+        <div class="cap-strip-org">Civil Air Patrol</div>
+        <div class="cap-strip-name">${c.name || 'Cadet Pilot'}</div>
+        <div class="cap-strip-unit">${[c.grade, c.unit].filter(Boolean).join(' · ') || 'Set your profile in Settings'}</div>
+      </div>
+    </div>
 
-                                                                                                                    <div class="form-group"><label>Instructor</label><input type="text" id="f_instructor" value="${FD.instructor||''}" placeholder="Name (leave blank if solo)" autocapitalize="words"></div>
-                                                                                                                    <div class="form-group"><label>Notes</label><textarea id="f_notes" rows="3" style="resize:vertical;">${FD.notes||''}</textarea></div>
+    <div class="summary-card">
+      <div class="summary-top">
+        <span class="summary-hours">${f(t.total)}</span>
+        <span class="summary-label">${t.entries} ${t.entries===1?'entry':'entries'}</span>
+      </div>
+      <div class="summary-label">TOTAL FLIGHT HOURS</div>
+      <div class="summary-stats">
+        <div class="summary-stat"><div class="summary-stat-val">${f(t.dual)}</div><div class="summary-stat-label">Dual</div></div>
+        <div class="summary-stat"><div class="summary-stat-val">${f(t.solo)}</div><div class="summary-stat-label">Solo</div></div>
+        <div class="summary-stat"><div class="summary-stat-val">${f(t.xc)}</div><div class="summary-stat-label">XC</div></div>
+        <div class="summary-stat"><div class="summary-stat-val">${f(t.night)}</div><div class="summary-stat-label">Night</div></div>
+      </div>
+    </div>
 
-                                                                                                                    <div class="form-actions">
-                                                                                                                        <button class="btn" onclick="closeModal()">Cancel</button>
-                                                                                                                        <button class="btn btn-primary" onclick="saveEntry()">${isEdit?'Save changes':'Log flight'}</button>
-                                                                                                                        </div>
-                                                                                                                        </div>
-                                                                                                                        </div>`;
-                                                                                                                    }
+    <div class="cards-row">
+      <div class="metric-card"><div class="metric-label">Instrument hours</div><div class="metric-value">${f(t.instrument)}</div><div class="metric-sub">logged to date</div></div>
+      <div class="metric-card"><div class="metric-label">Avg. flight length</div><div class="metric-value">${t.entries?f(t.total/t.entries):'0.0'}</div><div class="metric-sub">hours / flight</div></div>
+    </div>
 
-                                                                                                                    function setTab(t)  TAB = t; render(); function openAdd() { MODAL='add'; FD={date:today()}; render(); }
-                                                                                                                    function openEdit(id) { const e=S.logs.find(l=>l.id===id); if(!e)return; MODAL='add'; FD={...e}; render(); }
-                                                                                                                    function closeModal() { MODAL=null; FD={}; render(); }
+    ${recent.length ? `<div class="card"><div class="card-label">Recent flights</div><div class="log-list">${recent.map(logItem).join('')}</div></div>` : `<div class="empty"><i class="ti ti-plane-off" aria-hidden="true"></i><p>No flights logged yet.<br>Tap + on the Logbook tab to start.</p></div>`}
+  </div>`;
+}
 
-                                                                                                                    function saveEntry() {
-                                                                                                                        const total = parseFloat(g('f_total'));
-                                                                                                                        if (!g('f_date') || isNaN(total)) { alert('Date and total hours are required.'); return; }
-                                                                                                                        const entry = {
-                                                                                                                            id: FD.id || String(S.nid++),
-                                                                                                                            date: g('f_date'), aircraft: g('f_aircraft'), route: g('f_route'), total,
-                                                                                                                            dual: +g('f_dual')||0, solo: +g('f_solo')||0, xc: +g('f_xc')||0,
-                                                                                                                            night: +g('f_night')||0, instrument: +g('f_instrument')||0,
-                                                                                                                            landings: +g('f_landings')||0, instructor: g('f_instructor'), notes: g('f_notes')
-                                                                                                                        };
-                                                                                                                        if (FD.id) { S.logs = S.logs.map(l => l.id===FD.id ? entry : l); }
-                                                                                                                        else { S.logs.push(entry); }
-                                                                                                                        save(); MODAL=null; FD={}; TAB='logbook'; render();
-                                                                                                                    }
+// ---- LOGBOOK ----
+function rLogbook() {
+  const sorted = S.logs.slice().sort((a,b)=>b.date.localeCompare(a.date));
+  return `<div class="content">
+    <div class="sec-row">
+      <div><div class="sec-title">Logbook</div><div class="sec-sub">${S.logs.length} entries</div></div>
+      <button class="btn btn-sm no-print" onclick="printLog()"><i class="ti ti-printer" aria-hidden="true"></i> Print</button>
+    </div>
+    ${sorted.length===0
+      ? `<div class="empty"><i class="ti ti-plane-off" aria-hidden="true"></i><p>No flights yet.<br>Tap the + button to add your first entry.</p></div>`
+      : `<div class="log-list">${sorted.map(logItem).join('')}</div>`
+    }
+  </div>
+  <button class="fab no-print" onclick="openAdd()" aria-label="Log flight"><i class="ti ti-plus"></i></button>`;
+}
 
-                                                                                                                    function delEntry(id) {
-                                                                                                                        if (!confirm('Delete this flight entry?')) return;
-                                                                                                                        S.logs = S.logs.filter(l => l.id !== id);
-                                                                                                                        save(); render();
-                                                                                                                    }
+// ---- SETTINGS ----
+function rSettings() {
+  const c = S.cadet;
+  return `<div class="content">
+    <div class="sec-title" style="margin-bottom:12px;">Settings</div>
 
-                                                                                                                    function exportData() {
-                                                                                                                        const b = new Blob([JSON.stringify(S,null,2)], {type:'application/json'});
-                                                                                                                        const a = document.createElement('a');
-                                                                                                                        a.href = URL.createObjectURL(b);
-                                                                                                                        a.download = `cap_logbook_${today()}.json`;
-                                                                                                                        a.click();
-                                                                                                                    }
+    <div class="card">
+      <div class="card-label">Cadet profile</div>
+      <div class="form-group"><label>Full name</label><input type="text" value="${c.name||''}" oninput="S.cadet.name=this.value;save();" placeholder="Your name"></div>
+      <div class="form-2">
+        <div class="form-group"><label>CAP unit</label><input type="text" value="${c.unit||''}" oninput="S.cadet.unit=this.value;save();" placeholder="e.g. TX-040"></div>
+        <div class="form-group"><label>Grade</label><input type="text" value="${c.grade||''}" oninput="S.cadet.grade=this.value;save();" placeholder="e.g. C/SSgt"></div>
+      </div>
+    </div>
 
-                                                                                                                    function importData(e) {
-                                                                                                                        const file = e.target.files[0]; if (!file) return;
-                                                                                                                        const r = new FileReader();
-                                                                                                                        r.onload = ev => {
-                                                                                                                            try {
-                                                                                                                                const d = JSON.parse(ev.target.result);
-                                                                                                                                if (!d.logs)  alert('Invalid logbook file.'); return; const ids = new Set(S.logs.map(l=>l.id));
-                                                                                                                                const nl = d.logs.filter(l=>!ids.has(l.id));
-                                                                                                                                S.logs = [...S.logs, ...nl];
-                                                                                                                                if (d.cadet && !S.cadet.name) S.cadet = d.cadet;
-                                                                                                                                S.nid = Math.max(S.nid, ...S.logs.map(l=>+l.id||0)) + 1;
-                                                                                                                                save(); render();
-                                                                                                                                alert(`Imported ${nl.length} new entries.`);
-                                                                                                                            } catch(err)  alert('Could not read file.'); };
-                                                                                                                            r.readAsText(file);
-                                                                                                                        }
+    <div class="card">
+      <div class="card-label">Data</div>
+      <div class="setting-row"><div><div class="setting-label">Export logbook</div><div class="setting-desc">Download full JSON backup</div></div><button class="btn btn-sm" onclick="exportData()"><i class="ti ti-download" aria-hidden="true"></i> Export</button></div>
+      <div class="setting-row"><div><div class="setting-label">Import logbook</div><div class="setting-desc">Merge from backup file</div></div><label class="btn btn-sm" style="cursor:pointer;"><i class="ti ti-upload" aria-hidden="true"></i> Import<input type="file" accept=".json" style="display:none;" onchange="importData(event)"></label></div>
+      <div class="setting-row"><div><div class="setting-label" style="color:var(--red);">Clear all data</div><div class="setting-desc">Permanent — cannot be undone</div></div><button class="btn btn-sm btn-danger" onclick="clearAll()"><i class="ti ti-trash" aria-hidden="true"></i> Clear</button></div>
+    </div>
 
-                                                                                                                        function clearAll() {
-                                                                                                                            if (!confirm('Delete ALL data permanently?')) return;
-                                                                                                                            S = { cadet:{name:'',unit:'',grade:''}, logs:[], nid:1 };
-                                                                                                                            localStorage.removeItem('cap_logbook_v2'); render();
-                                                                                                                        }
+    <div class="card">
+      <div class="card-label">Print logbook</div>
+      <p style="font-size:13px;color:var(--text2);margin-bottom:12px;">Print or save your flight log as a PDF.</p>
+      <button class="btn btn-full" onclick="printLog()"><i class="ti ti-printer" aria-hidden="true"></i> Print / Save as PDF</button>
+    </div>
 
-                                                                                                                        function printLog()  window.print(); 
-                                                                                                                        function render() {
-                                                                                                                            const TABS = [['dash','ti-layout-dashboard','Dashboard'],['logbook','ti-book','Logbook'],['settings','ti-settings','Settings']];
-                                                                                                                            document.getElementById('app').innerHTML = `
-                                                                                                                            <div class="topbar">
-                                                                                                                                <span class="logo-badge"><span class="wing"></span> CAP</span>
-                                                                                                                                <span class="topbar-title">Flight Logbook</span>
-                                                                                                                                <div class="topbar-right">${TAB==='logbook'?'<button class="btn btn-primary btn-sm no-print" onclick="openAdd()"><i class="ti ti-plus" aria-hidden="true"></i> Log</button>':''}</div>
-                                                                                                                                </div>
-                                                                                                                                <div class="scroll-area">
-                                                                                                                                    ${TAB==='dash' ? rDash() : ''}
-                                                                                                                                    ${TAB==='logbook' ? rLogbook() : ''}
-                                                                                                                                    ${TAB==='settings' ? rSettings() : ''}
-                                                                                                                                    </div>
-                                                                                                                                    <nav class="bottom-nav no-print">
-                                                                                                                                        ${TABS.map(([t,i,l])=>`<button class="nav-item ${TAB===t?'active':''}" onclick="setTab('${t}')"><i class="ti ${i}" aria-hidden="true"></i><span>${l}</span></button>`).join('')}
-                                                                                                                                        </nav>
-                                                                                                                                        ${MODAL ? rModal() : ''}
-                                                                                                                                        `;
-                                                                                                                                    }
+    <div class="cap-footer">CIVIL AIR PATROL · CADET FLIGHT LOGBOOK<br>All data stored locally on this device</div>
+  </div>`;
+}
 
-                                                                                                                                    render();
-                                                                                                                                    </script>
-                                                                                                                                    </body>
-                                                                                                                                    </html>
+function rModal() {
+  const isEdit = !!FD.id;
+  return `<div class="sheet-overlay" onclick="if(event.target===this)closeModal()">
+    <div class="sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-title">${isEdit?'Edit flight':'Log a flight'}</div>
+      <div class="form-2">
+        <div class="form-group"><label>Date *</label><input type="date" id="f_date" value="${FD.date||today()}"></div>
+        <div class="form-group"><label>Total hours *</label><input type="number" id="f_total" value="${FD.total||''}" min="0" max="24" step="0.1" placeholder="0.0" inputmode="decimal"></div>
+      </div>
+      <div class="form-group"><label>Aircraft</label><input type="text" id="f_aircraft" value="${FD.aircraft||''}" placeholder="N-number / type" autocapitalize="characters"></div>
+      <div class="form-group"><label>Route</label><input type="text" id="f_route" value="${FD.route||''}" placeholder="e.g. KAUS – KSAT" autocapitalize="characters"></div>
+
+      <div class="form-divider">Hour breakdown (optional)</div>
+      <div class="form-3">
+        <div class="form-group"><label>Dual</label><input type="number" id="f_dual" value="${FD.dual||''}" min="0" step="0.1" placeholder="0.0" inputmode="decimal"></div>
+        <div class="form-group"><label>Solo</label><input type="number" id="f_solo" value="${FD.solo||''}" min="0" step="0.1" placeholder="0.0" inputmode="decimal"></div>
+        <div class="form-group"><label>XC</label><input type="number" id="f_xc" value="${FD.xc||''}" min="0" step="0.1" placeholder="0.0" inputmode="decimal"></div>
+        <div class="form-group"><label>Night</label><input type="number" id="f_night" value="${FD.night||''}" min="0" step="0.1" placeholder="0.0" inputmode="decimal"></div>
+        <div class="form-group"><label>Instrument</label><input type="number" id="f_instrument" value="${FD.instrument||''}" min="0" step="0.1" placeholder="0.0" inputmode="decimal"></div>
+        <div class="form-group"><label>Landings</label><input type="number" id="f_landings" value="${FD.landings||''}" min="0" step="1" placeholder="0" inputmode="numeric"></div>
+      </div>
+
+      <div class="form-group"><label>Instructor</label><input type="text" id="f_instructor" value="${FD.instructor||''}" placeholder="Name (leave blank if solo)" autocapitalize="words"></div>
+      <div class="form-group"><label>Notes</label><textarea id="f_notes" rows="3" style="resize:vertical;">${FD.notes||''}</textarea></div>
+
+      <div class="form-actions">
+        <button class="btn" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveEntry()">${isEdit?'Save changes':'Log flight'}</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function setTab(t) { TAB = t; render(); }
+function openAdd() { MODAL='add'; FD={date:today()}; render(); }
+function openEdit(id) { const e=S.logs.find(l=>l.id===id); if(!e)return; MODAL='add'; FD={...e}; render(); }
+function closeModal() { MODAL=null; FD={}; render(); }
+
+function saveEntry() {
+  const total = parseFloat(g('f_total'));
+  if (!g('f_date') || isNaN(total)) { alert('Date and total hours are required.'); return; }
+  const entry = {
+    id: FD.id || String(S.nid++),
+    date: g('f_date'), aircraft: g('f_aircraft'), route: g('f_route'), total,
+    dual: +g('f_dual')||0, solo: +g('f_solo')||0, xc: +g('f_xc')||0,
+    night: +g('f_night')||0, instrument: +g('f_instrument')||0,
+    landings: +g('f_landings')||0, instructor: g('f_instructor'), notes: g('f_notes')
+  };
+  if (FD.id) { S.logs = S.logs.map(l => l.id===FD.id ? entry : l); }
+  else { S.logs.push(entry); }
+  save(); MODAL=null; FD={}; TAB='logbook'; render();
+}
+
+function delEntry(id) {
+  if (!confirm('Delete this flight entry?')) return;
+  S.logs = S.logs.filter(l => l.id !== id);
+  save(); render();
+}
+
+function exportData() {
+  const b = new Blob([JSON.stringify(S,null,2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(b);
+  a.download = `cap_logbook_${today()}.json`;
+  a.click();
+}
+
+function importData(e) {
+  const file = e.target.files[0]; if (!file) return;
+  const r = new FileReader();
+  r.onload = ev => {
+    try {
+      const d = JSON.parse(ev.target.result);
+      if (!d.logs) { alert('Invalid logbook file.'); return; }
+      const ids = new Set(S.logs.map(l=>l.id));
+      const nl = d.logs.filter(l=>!ids.has(l.id));
+      S.logs = [...S.logs, ...nl];
+      if (d.cadet && !S.cadet.name) S.cadet = d.cadet;
+      S.nid = Math.max(S.nid, ...S.logs.map(l=>+l.id||0)) + 1;
+      save(); render();
+      alert(`Imported ${nl.length} new entries.`);
+    } catch(err) { alert('Could not read file.'); }
+  };
+  r.readAsText(file);
+}
+
+function clearAll() {
+  if (!confirm('Delete ALL data permanently?')) return;
+  S = { cadet:{name:'',unit:'',grade:''}, logs:[], nid:1 };
+  localStorage.removeItem('cap_logbook_v2'); render();
+}
+
+function printLog() { window.print(); }
+
+function render() {
+  const TABS = [['dash','ti-layout-dashboard','Dashboard'],['logbook','ti-book','Logbook'],['settings','ti-settings','Settings']];
+  document.getElementById('app').innerHTML = `
+    <div class="topbar">
+      <span class="logo-badge"><span class="wing">✈</span> CAP</span>
+      <span class="topbar-title">Flight Logbook</span>
+      <div class="topbar-right">${TAB==='logbook'?'<button class="btn btn-primary btn-sm no-print" onclick="openAdd()"><i class="ti ti-plus" aria-hidden="true"></i> Log</button>':''}</div>
+    </div>
+    <div class="scroll-area">
+      ${TAB==='dash' ? rDash() : ''}
+      ${TAB==='logbook' ? rLogbook() : ''}
+      ${TAB==='settings' ? rSettings() : ''}
+    </div>
+    <nav class="bottom-nav no-print">
+      ${TABS.map(([t,i,l])=>`<button class="nav-item ${TAB===t?'active':''}" onclick="setTab('${t}')"><i class="ti ${i}" aria-hidden="true"></i><span>${l}</span></button>`).join('')}
+    </nav>
+    ${MODAL ? rModal() : ''}
+  `;
+}
+
+render();
+</script>
+</body>
+</html>
