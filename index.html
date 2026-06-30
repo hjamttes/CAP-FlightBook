@@ -7,6 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0f2548">
 <title>CAP Flight Logbook</title>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <style>
 :root {
@@ -353,16 +354,16 @@ const CERTS = [
   { key:'tsa',          label:'TSA citizenship verification',pp:false, lsa:true,  note:'Required for non-US citizens on the LSA path' },
   { key:'checkride',    label:'Practical test passed',       pp:true,  lsa:true,  note:'Completed with FAA DPE or aviation safety inspector' },
 ];
-const AIRPORTS_FB = [
-["KATL","Hartsfield-Jackson Atlanta Intl","Atlanta","GA","L"],["KORD","O'Hare International","Chicago","IL","L"],["KLAX","Los Angeles International","Los Angeles","CA","L"],["KDFW","Dallas/Fort Worth International","Dallas","TX","L"],["KDEN","Denver International","Denver","CO","L"],["KJFK","John F. Kennedy International","New York","NY","L"],["KSFO","San Francisco International","San Francisco","CA","L"],["KLAS","Harry Reid International","Las Vegas","NV","L"],["KPHX","Phoenix Sky Harbor International","Phoenix","AZ","L"],["KMIA","Miami International","Miami","FL","L"],["KSEA","Seattle-Tacoma International","Seattle","WA","L"],["KEWR","Newark Liberty International","Newark","NJ","L"],["KIAH","George Bush Intercontinental","Houston","TX","L"],["KBOS","Logan International","Boston","MA","L"],["KMSP","Minneapolis-Saint Paul Intl","Minneapolis","MN","L"],["KDTW","Detroit Metropolitan Wayne County","Detroit","MI","L"],["KPHL","Philadelphia International","Philadelphia","PA","L"],["KLGA","LaGuardia","New York","NY","L"],["KBWI","Baltimore/Washington International","Baltimore","MD","L"],["KIAD","Washington Dulles International","Washington","DC","L"],["KDCA","Ronald Reagan Washington National","Arlington","VA","L"],["KSLC","Salt Lake City International","Salt Lake City","UT","L"],["KMCO","Orlando International","Orlando","FL","L"],["KTPA","Tampa International","Tampa","FL","L"],["KPDX","Portland International","Portland","OR","L"],["KCLT","Charlotte Douglas International","Charlotte","NC","L"],["KMDW","Chicago Midway International","Chicago","IL","L"],["KSAN","San Diego International","San Diego","CA","L"],["KDAL","Dallas Love Field","Dallas","TX","L"],["KHOU","William P. Hobby","Houston","TX","L"],["KBNA","Nashville International","Nashville","TN","L"],["KAUS","Austin-Bergstrom International","Austin","TX","L"],["KSAT","San Antonio International","San Antonio","TX","L"],["KELP","El Paso International","El Paso","TX","L"],["KABI","Abilene Regional","Abilene","TX","M"],["KAMA","Rick Husband Amarillo Intl","Amarillo","TX","M"],["KCLL","Easterwood Field","College Station","TX","M"],["KCRP","Corpus Christi International","Corpus Christi","TX","M"],["KLUB","Lubbock Preston Smith Intl","Lubbock","TX","L"],["KMAF","Midland International","Midland","TX","M"],["KWAC","Waco Regional","Waco","TX","M"],["KGTU","Georgetown Municipal","Georgetown","TX","S"],["KGYB","Giddings-Lee County","Giddings","TX","S"],["KEDC","Austin Executive","Austin","TX","S"],["KHYI","San Marcos Regional","San Marcos","TX","S"],["KSSF","Stinson Municipal","San Antonio","TX","S"],["KBHM","Birmingham-Shuttlesworth Intl","Birmingham","AL","M"],["KMOB","Mobile Regional","Mobile","AL","M"],["KLIT","Clinton National","Little Rock","AR","M"],["KFLL","Fort Lauderdale-Hollywood Intl","Fort Lauderdale","FL","L"],["KJAX","Jacksonville International","Jacksonville","FL","M"],["KPNS","Pensacola International","Pensacola","FL","M"],["KRSW","Southwest Florida International","Fort Myers","FL","M"],["KTLH","Tallahassee International","Tallahassee","FL","M"],["KCVG","Cincinnati/Northern Kentucky Intl","Cincinnati","OH","L"],["KCLE","Cleveland Hopkins International","Cleveland","OH","M"],["KCMH","John Glenn Columbus International","Columbus","OH","M"],["KSAV","Savannah/Hilton Head International","Savannah","GA","M"],["KMSY","Louis Armstrong New Orleans Intl","New Orleans","LA","L"],["KBTR","Baton Rouge Metropolitan","Baton Rouge","LA","M"],["KSHV","Shreveport Regional","Shreveport","LA","M"],["KBUF","Buffalo Niagara International","Buffalo","NY","M"],["KROC","Greater Rochester International","Rochester","NY","M"],["KPVD","T.F. Green International","Providence","RI","M"],["KBDL","Bradley International","Hartford","CT","M"],["KMHT","Manchester-Boston Regional","Manchester","NH","M"],["KBGR","Bangor International","Bangor","ME","M"],["KPWM","Portland International Jetport","Portland","ME","M"],["KIND","Indianapolis International","Indianapolis","IN","M"],["KGRR","Gerald R. Ford International","Grand Rapids","MI","M"],["KMSN","Dane County Regional","Madison","WI","M"],["KMKE","General Mitchell International","Milwaukee","WI","M"],["KDSM","Des Moines International","Des Moines","IA","M"],["KFSD","Sioux Falls Regional","Sioux Falls","SD","M"],["KOMA","Eppley Airfield","Omaha","NE","M"],["KICT","Eisenhower National","Wichita","KS","M"],["KMCI","Kansas City International","Kansas City","MO","L"],["KBIL","Billings Logan International","Billings","MT","M"],["KBZN","Bozeman Yellowstone International","Bozeman","MT","M"],["KCOS","Colorado Springs Airport","Colorado Springs","CO","M"],["KTUS","Tucson International","Tucson","AZ","M"],["KDVT","Phoenix Deer Valley","Phoenix","AZ","M"],["KSDL","Scottsdale Airport","Scottsdale","AZ","S"],["KFFZ","Falcon Field","Mesa","AZ","S"],["KFAT","Fresno Yosemite International","Fresno","CA","M"],["KSMF","Sacramento International","Sacramento","CA","L"],["KSBA","Santa Barbara Municipal","Santa Barbara","CA","M"],["KBUR","Hollywood Burbank","Burbank","CA","M"],["KSNA","John Wayne Airport","Orange County","CA","M"],["KONT","Ontario International","Ontario","CA","M"],["KPSP","Palm Springs International","Palm Springs","CA","M"],["KSJC","Norman Y. Mineta San Jose Intl","San Jose","CA","L"],["KOAK","Oakland International","Oakland","CA","M"],["KRDM","Roberts Field","Redmond","OR","S"],["KEUG","Eugene Airport","Eugene","OR","M"],["KGEG","Spokane International","Spokane","WA","M"],["KBOI","Boise Airport","Boise","ID","M"],["KRNO","Reno-Tahoe International","Reno","NV","M"],["KOKC","Will Rogers World","Oklahoma City","OK","M"],["KTUL","Tulsa International","Tulsa","OK","M"],["KGSP","Greenville-Spartanburg Intl","Greer","SC","M"],["KCHS","Charleston International","Charleston","SC","M"],["KRDU","Raleigh-Durham International","Raleigh","NC","M"],["KORF","Norfolk International","Norfolk","VA","M"],["KRIC","Richmond International","Richmond","VA","M"],["KLEX","Blue Grass Airport","Lexington","KY","M"],["KSDF","Louisville Muhammad Ali Intl","Louisville","KY","M"],["PHNL","Daniel K. Inouye International","Honolulu","HI","L"],["PHOG","Kahului Airport","Kahului","HI","M"],["PANC","Ted Stevens Anchorage Intl","Anchorage","AK","L"],["PAFA","Fairbanks International","Fairbanks","AK","M"],["PAJN","Juneau International","Juneau","AK","M"],["KPIT","Pittsburgh International","Pittsburgh","PA","L"],["KPDK","Dekalb-Peachtree","Atlanta","GA","S"],["KRYY","Cobb County-McCollum Field","Atlanta","GA","S"],["KCCR","Buchanan Field","Concord","CA","S"],["KPAO","Palo Alto Airport","Palo Alto","CA","S"],["KSQL","San Carlos Airport","San Carlos","CA","S"],["KHEF","Manassas Regional","Manassas","VA","S"],["KTEB","Teterboro Airport","Teterboro","NJ","S"],["KACY","Atlantic City International","Atlantic City","NJ","M"],["KAVP","Wilkes-Barre/Scranton Intl","Scranton","PA","M"],["KPIE","St Pete-Clearwater Intl","St. Petersburg","FL","M"],["KSFB","Orlando Sanford International","Sanford","FL","M"],["KDAY","Dayton International","Dayton","OH","M"]
-];
 const AP_TYPES = {0:'Airport',1:'Glider',2:'Airfield',3:'Intl Airport',4:'Heliport',5:'Military',6:'ULM',8:'Closed',9:'IFR',10:'Seaplane',L:'Large',M:'Medium',S:'Small'};
 
 function loadState() { try { const r=localStorage.getItem('cap_v3'); return r?JSON.parse(r):null; } catch(e){return null;} }
 let S = loadState() || { cadet:{name:'',unit:'',grade:''}, logs:[], certs:{}, apiKey:'', nid:1 };
 let TAB='dash', PATH='PP', MODAL=null, FD={};
 
-function save() { try { localStorage.setItem('cap_v3', JSON.stringify(S)); } catch(e){} }
+function save() {
+  try { localStorage.setItem('cap_v3', JSON.stringify(S)); } catch(e){}
+  if (gToken) driveBackup();
+}
 function today() { return new Date().toISOString().slice(0,10); }
 function f(n) { return (+n||0).toFixed(1); }
 function g(id) { const e=document.getElementById(id); return e?e.value:''; }
@@ -432,7 +433,7 @@ function rDash() {
         <div class="cap-hero-text">
           <div class="cap-hero-org">Civil Air Patrol</div>
           <div class="cap-hero-name">${c.name||'Cadet Pilot'}</div>
-          <div class="cap-hero-unit">${[c.grade,c.unit].filter(Boolean).join(' · ')||'<a href="#" onclick="setTab(\'settings\');return false;" style="color:rgba(255,255,255,0.6);">Set profile in Settings</a>'}</div>
+          <div class="cap-hero-unit">${rHeroUnit(c)}</div>
         </div>
       </div>
       <div class="cap-hero-stats">
@@ -615,7 +616,32 @@ function rSettings() {
     </div>
 
     <div class="card">
-      <div class="card-header"><span class="card-title">Data</span></div>
+      <div class="card-header"><span class="card-title">Google Drive backup</span></div>
+      ${gUser ? `
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:0.5px solid var(--border);margin-bottom:4px;">
+          <img src="${gUser.picture}" style="width:36px;height:36px;border-radius:50%;flex-shrink:0;" referrerpolicy="no-referrer">
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:14px;font-weight:600;">${gUser.name}</div>
+            <div style="font-size:12px;color:var(--text2);">${gUser.email}</div>
+            <div id="sync-status" style="margin-top:3px;">${rSyncStatus()}</div>
+          </div>
+          <button class="btn btn-sm btn-danger" onclick="googleSignOut()">Sign out</button>
+        </div>
+        <div class="setting-row" style="padding-top:10px;">
+          <div><div class="setting-label">Restore from Drive</div><div class="setting-desc">Merge latest backup into local data</div></div>
+          <button class="btn btn-sm" onclick="driveRestore()"><i class="ti ti-cloud-download"></i> Restore</button>
+        </div>
+      ` : `
+        <p style="font-size:13px;color:var(--text2);margin-bottom:14px;">Sign in with Google to automatically back up your logbook to a <strong>CAP Flight Logbook</strong> folder in your Google Drive every time you save.</p>
+        <button class="btn btn-full" onclick="googleSignIn()" style="justify-content:center;gap:10px;border:0.5px solid var(--border-md);">
+          <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-3.59-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
+          Sign in with Google
+        </button>
+      `}
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="card-title">Local data</span></div>
       <div class="setting-row"><div><div class="setting-label">Export logbook</div><div class="setting-desc">Download full JSON backup</div></div><button class="btn btn-sm" onclick="exportData()"><i class="ti ti-download"></i> Export</button></div>
       <div class="setting-row"><div><div class="setting-label">Import logbook</div><div class="setting-desc">Merge from backup file</div></div><label class="btn btn-sm" style="cursor:pointer;"><i class="ti ti-upload"></i> Import<input type="file" accept=".json" style="display:none;" onchange="importData(event)"></label></div>
       <div class="setting-row"><div><div class="setting-label" style="color:var(--red);">Clear all data</div><div class="setting-desc">Permanent — cannot be undone</div></div><button class="btn btn-sm btn-danger" onclick="clearAll()"><i class="ti ti-trash"></i> Clear</button></div>
@@ -966,37 +992,19 @@ function apRenderLive(items) {
   }).join('')}</div>`;
 }
 
-function apRenderFallback(q,netErr) {
-  const res=document.getElementById('ap-results');
-  if(!res)return;
-  const scored=[];
-  for(const a of AIRPORTS_FB){
-    const [icao,name,city,state,type]=a; let score=0;
-    const nu=name.toUpperCase(),cu=city.toUpperCase();
-    if(icao===q)score+=100; else if(icao.startsWith(q))score+=80; else if(icao.includes(q))score+=50;
-    if(nu.startsWith(q))score+=40; else if(nu.includes(q))score+=20;
-    if(cu===q)score+=35; else if(cu.startsWith(q))score+=25; else if(cu.includes(q))score+=10;
-    if(state===q)score+=5;
-    if(type==='L')score+=6; if(type==='M')score+=3;
-    if(score>0)scored.push([score,a]);
+function apRenderFallback(q, netErr) {
+  const res = document.getElementById('ap-results');
+  if (!res) return;
+  const clean = q.replace(/[^A-Z0-9]/g,'').slice(0,5);
+  const manualEntry = clean.length>=2
+    ? `<div class="ap-dropdown" style="margin-top:6px;"><div class="ap-row" onclick="addStop('${clean}')"><span class="ap-icao">${clean}</span><div class="ap-meta"><div class="ap-name">Add "${clean}" manually</div><div class="ap-loc">${netErr?'Offline entry':'Manual entry'}</div></div></div></div>`
+    : '';
+  if (netErr) {
+    res.innerHTML = `<div class="ap-hint" style="color:var(--amber);">⚠ Could not reach OpenAIP. Check your connection or API key in Settings.${manualEntry}</div>`;
+  } else {
+    res.innerHTML = `<div class="ap-hint">No API key set. <a href="#" onclick="setTab('settings');closeModal();return false;" style="color:var(--navy-mid);font-weight:600;">Add your OpenAIP key in Settings</a> to enable airport search.${manualEntry}</div>`;
   }
-  scored.sort((a,b)=>b[0]-a[0]);
-  const results=scored.slice(0,12).map(s=>s[1]);
-  let hint=netErr?'<div class="ap-hint" style="color:var(--amber);">⚠ OpenAIP unreachable — showing built-in list</div>'
-    :!S.apiKey?`<div class="ap-hint">Built-in list · <a href="#" onclick="setTab('settings');closeModal();return false;" style="color:var(--navy-mid);">Add API key</a> for worldwide search</div>`:'' ;
-  if(!results.length){
-    const clean=q.replace(/[^A-Z0-9]/g,'').slice(0,5);
-    res.innerHTML=hint+(clean.length>=2?`<div class="ap-dropdown"><div class="ap-row" onclick="addStop('${clean}')"><span class="ap-icao">${clean}</span><div class="ap-meta"><div class="ap-name">Add "${clean}" directly</div><div class="ap-loc">Custom / unlisted</div></div></div></div>`:'<div class="ap-hint">No results — try ICAO, name, or city.</div>');
-    return;
-  }
-  res.innerHTML=hint+`<div class="ap-dropdown">${results.map(([icao,name,city,state,type])=>
-    `<div class="ap-row" onclick="addStop('${icao}')">
-      <span class="ap-icao">${icao}</span>
-      <div class="ap-meta"><div class="ap-name">${eh(name)}</div><div class="ap-loc">${eh(city)}, ${state}</div></div>
-      <span class="ap-type-badge">${AP_TYPES[type]||type}</span>
-    </div>`).join('')}</div>`;
 }
-
 function apShowMsg(msg,color='var(--text2)') {
   const res=document.getElementById('ap-results');
   if(res)res.innerHTML=`<div class="ap-hint" style="color:${color};">${msg}</div>`;
@@ -1031,6 +1039,409 @@ function manualStop() {
 }
 
 // ═══════════════════════════════════════════════
+//  GOOGLE SIGN-IN + DRIVE BACKUP
+// ═══════════════════════════════════════════════
+const GOOG_CLIENT_ID = '996918033400-506utcfdtsavbgflc5pvdrodki13cjin.apps.googleusercontent.com';
+const DRIVE_SCOPE    = 'https://www.googleapis.com/auth/drive.file';
+const BACKUP_FILENAME = 'cap_logbook_backup.json';
+const FOLDER_NAME     = 'CAP Flight Logbook';
+
+let gToken       = null;   // current OAuth access token
+let gUser        = null;   // { name, email, picture }
+let gFolderId    = localStorage.getItem('cap_drive_folder') || null;
+let gBackupId    = localStorage.getItem('cap_drive_backup') || null;
+let gSyncing     = false;
+let gLastSync    = localStorage.getItem('cap_last_sync')   || null;
+let gSyncError   = null;
+
+// Whether this token grant is a fresh sign-in (vs silent refresh)
+let gIsFreshSignIn = false;
+
+// Called by GSI one-tap when user selects account via credential
+function handleGoogleCred(response) {
+  const payload = JSON.parse(atob(response.credential.split('.')[1]));
+  gUser = { name: payload.name, email: payload.email, picture: payload.picture };
+  localStorage.setItem('cap_guser', JSON.stringify(gUser));
+  gIsFreshSignIn = true;
+  tokenClient.requestAccessToken({ prompt: '' });
+}
+
+// Token client (implicit flow for Drive scope)
+let tokenClient = null;
+function initGoogleAuth() {
+  if (!window.google) return;
+  tokenClient = google.accounts.oauth2.initTokenClient({
+    client_id: GOOG_CLIENT_ID,
+    scope: DRIVE_SCOPE,
+    callback: async (tokenResp) => {
+      if (tokenResp.error) {
+        gSyncError = tokenResp.error;
+        showPopupBlockedBanner(tokenResp.error);
+        render();
+        return;
+      }
+      gToken = tokenResp.access_token;
+      gSyncError = null;
+      hideDriveBanner();
+
+      // If gUser is still null (popup flow bypassed handleGoogleCred),
+      // fetch user info directly from Google's userinfo endpoint
+      if (!gUser) {
+        const stored = localStorage.getItem('cap_guser');
+        if (stored) {
+          gUser = JSON.parse(stored);
+        } else {
+          // Fetch from userinfo — this handles the retryPopupSignIn path
+          try {
+            const ui = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+              headers: { 'Authorization': `Bearer ${gToken}` }
+            });
+            if (ui.ok) {
+              const u = await ui.json();
+              gUser = { name: u.name, email: u.email, picture: u.picture };
+              localStorage.setItem('cap_guser', JSON.stringify(gUser));
+              // This is always a fresh sign-in if we had to look up the user
+              gIsFreshSignIn = true;
+            }
+          } catch(e) { /* non-fatal */ }
+        }
+      }
+
+      render();
+
+      if (gIsFreshSignIn) {
+        gIsFreshSignIn = false;
+        await drivePullOnSignIn();
+      } else {
+        await driveBackup();
+      }
+    }
+  });
+  // Auto-restore session silently if user was previously signed in
+  const stored = localStorage.getItem('cap_guser');
+  if (stored) {
+    gUser = JSON.parse(stored);
+    gIsFreshSignIn = false;
+    tokenClient.requestAccessToken({ prompt: 'none' });
+  }
+}
+
+function googleSignIn() {
+  if (!window.google) {
+    showDriveBanner('error', 'Google Sign-In library not loaded. Check your internet connection.');
+    return;
+  }
+  if (!tokenClient) initGoogleAuth();
+  if (!gUser) {
+    // Try one-tap first; if browser blocks it, fall through to popup flow
+    google.accounts.id.initialize({
+      client_id: GOOG_CLIENT_ID,
+      callback: handleGoogleCred,
+      cancel_on_tap_outside: false
+    });
+    google.accounts.id.prompt((notification) => {
+      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+        // One-tap was suppressed — use the explicit popup token flow instead
+        gIsFreshSignIn = true;
+        tokenClient.requestAccessToken({ prompt: 'select_account' });
+      }
+    });
+  } else {
+    // Already have user info — just refresh the token
+    gIsFreshSignIn = false;
+    tokenClient.requestAccessToken({ prompt: '' });
+  }
+}
+
+// ── Pull Drive backup on first sign-in ──────────────────────────────────────
+// Drive is the source of truth. We:
+//   1. Download the Drive backup
+//   2. Start with Drive's entries as the base
+//   3. Add any LOCAL entries not present in Drive (entries created offline)
+//   4. Save the merged result locally and push back to Drive
+async function drivePullOnSignIn() {
+  updateSyncIndicator('syncing');
+  try {
+    const folderId = await getOrCreateFolder();
+    if (!folderId) { await driveBackup(); return; }
+
+    const q = encodeURIComponent(`name='${BACKUP_FILENAME}' and '${folderId}' in parents and trashed=false`);
+    const sr = await driveReq(`https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id)`, { method:'GET' });
+    const sd = sr ? await sr.json() : {};
+
+    if (sd.files && sd.files.length > 0) {
+      gBackupId = sd.files[0].id;
+      localStorage.setItem('cap_drive_backup', gBackupId);
+
+      const fr = await driveReq(`https://www.googleapis.com/drive/v3/files/${gBackupId}?alt=media`, { method:'GET' });
+      if (fr && fr.ok) {
+        const driveData = await fr.json();
+        if (driveData && driveData.logs) {
+          // Drive is source of truth — keep Drive's entries as the base
+          const driveIds = new Set(driveData.logs.map(l => l.id));
+          // Add local-only entries (created offline since last sync)
+          const localOnly = S.logs.filter(l => !driveIds.has(l.id));
+
+          const before = S.logs.length;
+          // Replace local state with Drive data + any local-only entries
+          S.logs  = [...driveData.logs, ...localOnly];
+          S.certs = { ...driveData.certs, ...S.certs };  // local cert overrides Drive
+          if (driveData.cadet && driveData.cadet.name) S.cadet = driveData.cadet;
+          S.nid   = Math.max(S.nid, ...S.logs.map(l => +l.id || 0)) + 1;
+
+          const removed = before - driveData.logs.length;
+          const added   = localOnly.length;
+
+          try { localStorage.setItem('cap_v3', JSON.stringify(S)); } catch(e) {}
+          render();
+
+          let msg = `Synced with Drive: ${driveData.logs.length} flight${driveData.logs.length !== 1 ? 's' : ''} loaded.`;
+          if (added > 0)   msg += ` ${added} local-only entr${added !== 1 ? 'ies' : 'y'} kept.`;
+          if (removed > 0) msg += ` ${removed} local entr${removed !== 1 ? 'ies' : 'y'} not in Drive removed.`;
+          showDriveBanner('info', msg);
+        }
+      }
+    } else {
+      // No backup in Drive yet — this is a fresh install, push local data up
+      showDriveBanner('info', 'No Drive backup found — uploading your current data now.');
+    }
+    // Push merged state (or fresh local data) to Drive
+    await driveBackup();
+  } catch(e) {
+    gSyncError = e.message;
+    updateSyncIndicator('error');
+    showDriveBanner('error', 'Sync failed: ' + e.message);
+  }
+}
+
+// ── In-app banner for popup blocked / Drive notices ────────────────────────
+function showPopupBlockedBanner(errCode) {
+  const isBlocked = errCode === 'popup_closed_by_user' || errCode === 'access_denied'
+                 || errCode === 'popup_blocked_by_browser';
+  if (isBlocked) {
+    showDriveBanner('warn',
+      'Sign-in popup was blocked by your browser. ' +
+      '<a href="#" onclick="retryPopupSignIn();return false;" style="font-weight:700;text-decoration:underline;">Tap here to try again</a> ' +
+      '— you may need to allow popups for this site in your browser settings.'
+    );
+  } else {
+    showDriveBanner('error', 'Google sign-in failed: ' + errCode);
+  }
+}
+
+function retryPopupSignIn() {
+  hideDriveBanner();
+  gIsFreshSignIn = true;
+  // Force popup, skip one-tap entirely
+  tokenClient.requestAccessToken({ prompt: 'select_account' });
+}
+
+function showDriveBanner(type, msg) {
+  let el = document.getElementById('drive-banner');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'drive-banner';
+    el.style.cssText = 'position:fixed;top:54px;left:0;right:0;z-index:999;padding:10px 16px;font-size:13px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 8px rgba(0,0,0,0.15);';
+    document.body.appendChild(el);
+  }
+  const colors = {
+    warn:  { bg:'#fff3cd', color:'#7a4a00', border:'#f5c842' },
+    error: { bg:'#fde8e8', color:'#7a1e1e', border:'#f0a0a0' },
+    info:  { bg:'#d4edda', color:'#155724', border:'#70c98a'  }
+  };
+  const c = colors[type] || colors.info;
+  el.style.background = c.bg;
+  el.style.color = c.color;
+  el.style.borderBottom = `2px solid ${c.border}`;
+  el.innerHTML = `<span style="flex:1;">${msg}</span><button onclick="hideDriveBanner()" style="background:none;border:none;cursor:pointer;font-size:18px;color:${c.color};line-height:1;padding:0 4px;">×</button>`;
+}
+
+function hideDriveBanner() {
+  const el = document.getElementById('drive-banner');
+  if (el) el.remove();
+}
+
+function googleSignOut() {
+  if (!confirm('Sign out of Google? Auto-backup will be disabled until you sign back in.')) return;
+  gToken = null; gUser = null; gFolderId = null; gBackupId = null;
+  localStorage.removeItem('cap_guser');
+  localStorage.removeItem('cap_drive_folder');
+  localStorage.removeItem('cap_drive_backup');
+  localStorage.removeItem('cap_last_sync');
+  gLastSync = null; gSyncError = null;
+  if (window.google) google.accounts.id.disableAutoSelect();
+  render();
+}
+
+// ── Drive helpers ──────────────────────────────
+async function driveReq(url, opts) {
+  if (!gToken) return null;
+  const r = await fetch(url, {
+    ...opts,
+    headers: { 'Authorization': `Bearer ${gToken}`, ...(opts.headers||{}) }
+  });
+  if (r.status === 401) { gToken = null; render(); return null; }
+  return r;
+}
+
+async function getOrCreateFolder() {
+  if (gFolderId) return gFolderId;
+  // Search for existing folder
+  const q = encodeURIComponent(`mimeType='application/vnd.google-apps.folder' and name='${FOLDER_NAME}' and trashed=false`);
+  const r = await driveReq(`https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id,name)`, { method:'GET' });
+  if (!r) return null;
+  const data = await r.json();
+  if (data.files && data.files.length > 0) {
+    gFolderId = data.files[0].id;
+  } else {
+    // Create folder
+    const cr = await driveReq('https://www.googleapis.com/drive/v3/files', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: FOLDER_NAME, mimeType: 'application/vnd.google-apps.folder' })
+    });
+    if (!cr) return null;
+    const folder = await cr.json();
+    gFolderId = folder.id;
+  }
+  localStorage.setItem('cap_drive_folder', gFolderId);
+  return gFolderId;
+}
+
+async function driveBackup() {
+  if (!gToken || gSyncing) return;
+  gSyncing = true; gSyncError = null;
+  updateSyncIndicator('syncing');
+  try {
+    const folderId = await getOrCreateFolder();
+    if (!folderId) throw new Error('Could not access Drive folder');
+    const content  = JSON.stringify(S, null, 2);
+    const blob     = new Blob([content], { type: 'application/json' });
+    if (gBackupId) {
+      // Update existing file (PATCH)
+      const r = await driveReq(
+        `https://www.googleapis.com/upload/drive/v3/files/${gBackupId}?uploadType=media`,
+        { method:'PATCH', headers:{'Content-Type':'application/json'}, body: blob }
+      );
+      if (!r || !r.ok) throw new Error('Drive update failed');
+    } else {
+      // Check if file already exists in folder
+      const q = encodeURIComponent(`name='${BACKUP_FILENAME}' and '${folderId}' in parents and trashed=false`);
+      const sr = await driveReq(`https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id)`, { method:'GET' });
+      const sd = sr ? await sr.json() : {};
+      if (sd.files && sd.files.length > 0) {
+        gBackupId = sd.files[0].id;
+        localStorage.setItem('cap_drive_backup', gBackupId);
+        // Update it
+        const r = await driveReq(
+          `https://www.googleapis.com/upload/drive/v3/files/${gBackupId}?uploadType=media`,
+          { method:'PATCH', headers:{'Content-Type':'application/json'}, body: blob }
+        );
+        if (!r || !r.ok) throw new Error('Drive update failed');
+      } else {
+        // Step 1: create file metadata to get an ID
+        const metaRes = await driveReq(
+          'https://www.googleapis.com/drive/v3/files?fields=id',
+          { method:'POST', headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({ name: BACKUP_FILENAME, parents: [folderId], mimeType: 'application/json' }) }
+        );
+        if (!metaRes || !metaRes.ok) throw new Error('Drive create metadata failed');
+        const created = await metaRes.json();
+        gBackupId = created.id;
+        localStorage.setItem('cap_drive_backup', gBackupId);
+        // Step 2: upload the actual content
+        const uploadRes = await driveReq(
+          `https://www.googleapis.com/upload/drive/v3/files/${gBackupId}?uploadType=media`,
+          { method:'PATCH', headers:{'Content-Type':'application/json'}, body: blob }
+        );
+        if (!uploadRes || !uploadRes.ok) throw new Error('Drive content upload failed');
+      }
+    }
+    gLastSync = new Date().toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' });
+    localStorage.setItem('cap_last_sync', gLastSync);
+    updateSyncIndicator('ok');
+  } catch(e) {
+    gSyncError = e.message;
+    updateSyncIndicator('error');
+  } finally {
+    gSyncing = false;
+  }
+}
+
+function updateSyncIndicator(status) {
+  const el = document.getElementById('sync-status');
+  if (!el) return;
+  if (status === 'syncing') {
+    el.innerHTML = '<span style="color:var(--text3);font-size:11px;display:flex;align-items:center;gap:3px;"><span style="width:8px;height:8px;border:1.5px solid var(--text3);border-top-color:var(--navy-mid);border-radius:50%;animation:spin 0.7s linear infinite;display:inline-block;"></span> Saving…</span>';
+  } else if (status === 'ok') {
+    el.innerHTML = `<span style="color:var(--green);font-size:11px;font-weight:600;">✓ Backed up ${gLastSync}</span>`;
+  } else {
+    el.innerHTML = `<span style="color:var(--red);font-size:11px;font-weight:600;">✕ Sync error</span>`;
+  }
+}
+
+async function driveRestore() {
+  if (!gToken) { alert('Sign in to Google first.'); return; }
+  if (!gBackupId) { alert('No backup found in Drive yet.'); return; }
+  if (!confirm(
+    'Restore from Drive backup?\n\n' +
+    'Drive is the source of truth. Your local data will be ' +
+    'completely replaced with the Drive backup.\n\n' +
+    'This cannot be undone.'
+  )) return;
+  try {
+    updateSyncIndicator('syncing');
+    const r = await driveReq(`https://www.googleapis.com/drive/v3/files/${gBackupId}?alt=media`, { method:'GET' });
+    if (!r || !r.ok) throw new Error('Could not fetch backup');
+    const driveData = await r.json();
+    if (!driveData.logs) throw new Error('Invalid backup file');
+
+    // Drive is the sole source of truth — replace local state entirely
+    S.logs  = driveData.logs;
+    S.certs = driveData.certs || {};
+    if (driveData.cadet && driveData.cadet.name) S.cadet = driveData.cadet;
+    if (driveData.apiKey) S.apiKey = driveData.apiKey;
+    S.nid   = Math.max(S.nid, ...S.logs.map(l => +l.id || 0)) + 1;
+
+    save();
+    render();
+
+    const count = driveData.logs.length;
+    showDriveBanner('info', `Restored ${count} entr${count !== 1 ? 'ies' : 'y'} from Drive.`);
+  } catch(e) {
+    showDriveBanner('error', 'Restore failed: ' + e.message);
+  }
+}
+
+// Kick off auth init once GSI loads
+window.addEventListener('load', () => {
+  const poll = setInterval(() => {
+    if (window.google) { clearInterval(poll); initGoogleAuth(); }
+  }, 200);
+  setTimeout(() => clearInterval(poll), 10000);
+});
+
+
+function goSettings() { setTab("settings"); }
+function rHeroUnit(c) {
+  const parts = [c.grade, c.unit].filter(Boolean);
+  if (parts.length) return parts.join(' · ');
+  return '<a href="#" onclick="goSettings()" style="color:rgba(255,255,255,0.6);">Set profile in Settings</a>';
+}
+
+function rSyncStatus(ctx) {
+  if (ctx === 'topbar') {
+    if (!gUser) return '';
+    const first = gUser.name.split(' ')[0];
+    return '<span style="color:var(--gold-lt);font-size:11px;font-weight:600;">✓ ' + first + '</span>';
+  }
+  // settings card
+  if (gLastSync) return '<span style="color:var(--green);font-size:11px;font-weight:600;">✓ Backed up ' + gLastSync + '</span>';
+  return '<span style="font-size:11px;color:var(--text3);">Syncing…</span>';
+}
+
+
+// ═══════════════════════════════════════════════
 //  RENDER
 // ═══════════════════════════════════════════════
 function render() {
@@ -1044,7 +1455,8 @@ function render() {
           <span class="cap-bottom-line">Flight Logbook</span>
         </div>
       </div>
-      <div class="topbar-right">
+      <div class="topbar-right" style="display:flex;align-items:center;gap:10px;">
+        <span id="sync-status">${rSyncStatus('topbar')}</span>
         ${TAB==='logbook'?'<button class="btn btn-navy btn-sm no-print" onclick="openAdd()"><i class="ti ti-plus"></i> Log</button>':''}
       </div>
     </div>
